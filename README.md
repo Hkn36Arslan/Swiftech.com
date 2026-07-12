@@ -27,9 +27,11 @@ npm run dev
 
 Formun gerçekten e-posta göndermesi için [web3forms.com](https://web3forms.com) üzerinden ücretsiz bir "Access Key" alıp `.env.local` dosyasındaki `VITE_WEB3FORMS_KEY` değişkenine yapıştırın. Key girilmeden form denenirse kullanıcıya net bir uyarı gösterilir, sessizce başarısız olmaz.
 
-## Cloudflare Pages'e Deploy
+## Cloudflare'e Deploy
 
-**Yol 1 — Dashboard (önerilen):** Cloudflare Pages'te bu repo'yu bağlayın. Build command: `npm run build`, output dizini: `dist`. `VITE_WEB3FORMS_KEY` ortam değişkenini Pages proje ayarlarından ekleyin. Her push'ta otomatik deploy olur.
+Bu proje Cloudflare'in birleşik **Workers (Static Assets)** modeliyle deploy edilir — `wrangler.jsonc` içindeki `assets.directory` alanı `dist` klasörünü statik asset olarak sunar, ayrı bir Worker script'ine gerek yoktur. `not_found_handling: "single-page-application"` ayarı, bilinmeyen yolların `index.html`'e düşmesini sağlar (ileride client-side route eklenirse diye).
+
+**Yol 1 — Dashboard + GitHub entegrasyonu (önerilen):** Workers & Pages → Create → bu repo'yu bağlayın. Build command: `npm run build`, deploy command otomatik olarak `npx wrangler deploy` çalışır (repo'da `wrangler.jsonc` bulunduğu için). `VITE_WEB3FORMS_KEY` ortam değişkenini proje ayarlarından ekleyin. Her push'ta otomatik deploy olur.
 
 **Yol 2 — CLI:**
 
@@ -38,7 +40,7 @@ npx wrangler login
 npm run deploy
 ```
 
-`wrangler.jsonc` proje adını ve build çıktı dizinini tanımlar. `public/_headers` dosyası Cloudflare Pages tarafından otomatik okunur ve temel güvenlik header'larını ekler. Site tek sayfa (anchor navigasyonlu) olduğu için ayrı bir `_redirects` kuralına gerek yok — Cloudflare Pages statik projelerde bilinmeyen yolları zaten `index.html`'e (200) düşürür; ileride client-side route eklenirse bu davranış otomatik devam eder.
+`public/_headers` dosyası otomatik okunur ve temel güvenlik header'larını ekler.
 
 ## Proje Yapısı
 
