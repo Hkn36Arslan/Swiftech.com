@@ -1,12 +1,15 @@
 // Tüm site metinleri tek yerde toplanır — içerik güncellemesi için tek dosya.
-// Kaynak: "OkuGör Dijital Sepet" tanıtım PDF'i + kullanıcı düzeltmesi
-// (barkod okuma artık ayrı bir tarayıcı değil, tabletin kamerası ile yapılıyor).
+// Hero: "OkuGör Dijital Sepet" tanıtım PDF'i + kullanıcı düzeltmesi (barkod
+// okuma artık ayrı bir tarayıcı değil, tabletin kamerası ile yapılıyor).
+// Hakkımızda: reference/content-hakkimizda.md (gerçek metin).
+// İletişim/Kariyer gövde metinleri şu an lorem ipsum — gerçek metin gelince
+// bu dosyadan değiştirilecek.
 
 export const nav = [
-  { href: "#nasil-calisir", label: "Nasıl Çalışır" },
-  { href: "#ozellikler", label: "Özellikler" },
-  { href: "#neden-okugor", label: "Neden OkuGör" },
+  { href: "#projeler", label: "Projeler" },
+  { href: "#hakkimizda", label: "Hakkımızda" },
   { href: "#iletisim", label: "İletişim" },
+  { href: "#kariyer", label: "Kariyer" },
 ] as const
 
 export const hero = {
@@ -15,110 +18,90 @@ export const hero = {
   subtitle:
     "OkuGör Dijital Sepet, sepetinize attığınız her ürünü anında ekranda gösterir, toplam tutarınızı gözünüzün önünde şekillendirir. Kamerayla barkodu okut, ekrana bak — bu kadar basit.",
   primaryCta: "Demo Talep Et",
-  secondaryCta: "Özellikleri İncele",
+  secondaryCta: "Projeleri İncele",
 }
 
-export const problemSolution = {
-  title: "Kasada bekleme yok, sürpriz yok",
-  body: "OkuGör Dijital Sepet, alışveriş deneyimini baştan aşağı yeniden tasarlıyor. Sepetinize attığınız her ürün anında ekranda belirir, toplam tutarınız gözünüzün önünde şekillenir. Kamerayla barkodu okut, ekrana bak, bu kadar basit. Üstelik sistem sizi hiç yalnız bırakmaz; bir sorun olduğunda anında sizi uyarır. Kasaya geldiğinizde sürpriz yok, bekleme yok. Sadece akıllı, hızlı ve keyifli bir alışveriş.",
-}
-
-export const steps = [
-  {
-    title: "Sepete At",
-    description: "Ürünü her zamanki gibi sepete koyun, ekstra bir işlem gerekmez.",
-  },
-  {
-    title: "Kamerayla Okut",
-    description: "Tabletin kendi kamerasıyla barkodu veya QR kodu okutun.",
-  },
-  {
-    title: "Ekranda Anında Gör",
-    description: "Ürün adı, adedi, görseli ve güncel sepet tutarı anında ekrana yansır.",
-  },
-  {
-    title: "Kasada Beklemeden Çık",
-    description: "Toplam tutar zaten belli — kasada sürpriz ya da uzun bekleyiş yok.",
-  },
-] as const
-
-export type FeatureAlert = "info" | "success" | "warning"
-
-export const features: {
+export type Project = {
+  slug: string
   title: string
   description: string
-  alert?: FeatureAlert
-}[] = [
+  href: string
+  placeholder: boolean
+  span: "featured" | "half"
+}
+
+export const projects: Project[] = [
   {
-    title: "7″ Tablet Ekran",
-    description: "Sepete entegre, net ve okunaklı 7 inç dokunmatik ekran.",
+    slug: "oku-gor",
+    title: "Oku Gör",
+    description:
+      "Market arabasına entegre, kamera ile barkod okuyan dijital sepet paneli — kasada bekleme yok.",
+    href: "#hero",
+    placeholder: false,
+    span: "featured",
   },
   {
-    title: "Kamera ile Barkod Okuma",
-    description: "Ayrı bir tarayıcı gerekmeden, tabletin kamerasıyla 1D/2D barkod ve QR kod okuma.",
+    slug: "proje-2",
+    title: "Proje 2",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    href: "#",
+    placeholder: true,
+    span: "half",
   },
   {
-    title: "Su Sıçramalarına Dayanıklı",
-    description: "22 litrelik sert plastik gövde, günlük kullanım yıpranmasına karşı dayanıklı.",
-  },
-  {
-    title: "Anlık Ürün Bilgisi",
-    description: "Ürün adı, adet bilgisi ve ürün görseli ekranda anında görüntülenir.",
-  },
-  {
-    title: "Sepet Toplam Tutarı",
-    description: "Sepete eklenen her ürünle birlikte toplam tutar gerçek zamanlı güncellenir.",
-  },
-  {
-    title: "Şarj ve Wi-Fi Durumu",
-    description: "Tablet şarj düzeyi ve Wi-Fi bağlantı durumu her an ekranda.",
-  },
-  {
-    title: "Sürekli API Bağlantısı",
-    description: "Sunucu ile API üzerinden kesintisiz, gerçek zamanlı veri alışverişi.",
-  },
-  {
-    title: "Bağlantı Hatası Uyarısı",
-    description: "Veri çekme başarısız olduğunda kullanıcı otomatik olarak uyarılır.",
-    alert: "warning",
-  },
-  {
-    title: "Barkod Hatası Uyarısı",
-    description: "Barkod/QR okuma başarısız olduğunda anında geri bildirim verilir.",
-    alert: "warning",
+    slug: "proje-3",
+    title: "Proje 3",
+    description: "Sed do eiusmod tempor incididunt ut labore et dolore magna.",
+    href: "#",
+    placeholder: true,
+    span: "half",
   },
 ]
 
-export const techSpecs = [
-  { label: "Ekran boyutu", value: "7 inç dokunmatik tablet ekran" },
-  { label: "Barkod okuma", value: "Kamera ile 1D ve 2D barkod desteği (QR kod dahil)" },
-  { label: "Dayanıklılık", value: "Su sıçramalarına karşı dayanıklı gövde" },
-  { label: "Sepet kapasitesi", value: "22 litre sert plastik alışveriş sepeti" },
-  { label: "Ürün bilgisi", value: "Ürün adı, adet bilgisi ve ürün görseli" },
-  { label: "Sepet tutarı", value: "Sepet toplam tutarı, anlık güncellenir" },
-  { label: "Durum bilgisi", value: "Tablet şarj düzeyi ve Wi-Fi bağlantı durumu" },
-  { label: "Veri iletişimi", value: "Sunucu ile API üzerinden sürekli veri alışverişi" },
-  { label: "Bağlantı hatası", value: "Veri çekme başarısız olduğunda otomatik kullanıcı uyarısı" },
-  { label: "Barkod hatası", value: "Kamera ile okuma başarısız olduğunda kullanıcı uyarısı" },
-] as const
+export const about = {
+  eyebrow: "Hakkımızda",
+  intro:
+    "Swiftech, perakendenin en büyük operasyonel sorunlarından birini çözmek için kurulmuş bir perakende teknolojisi şirketidir: kasa. Kasa kuyruğu, hem müşteri memnuniyetini düşüren hem de marketlerin personel maliyetini artıran, on yıllardır çözülmemiş bir darboğazdır. Biz bu darboğazı, mevcut market arabalarına entegre ettiğimiz akıllı panel teknolojisiyle ortadan kaldırıyoruz.",
+  cards: [
+    {
+      lead: "Ne yapıyoruz.",
+      body:
+        "Geliştirdiğimiz panel, standart bir market arabasına takılıyor ve arabayı bir \"hareketli akıllı kasaya\" dönüştürüyor. Müşteri ürünü sepete atarken barkodunu okutuyor, sepetini ve toplam tutarını anlık takip ediyor, alışverişini arabanın üzerinden ödeyip kasaya hiç uğramadan çıkıyor. Bu, mağaza içinde sürtünmesiz bir \"tara-ve-git\" deneyimidir.",
+    },
+    {
+      lead: "Neden savunulabilir bir teknoloji.",
+      body:
+        "Bu pazarda asıl zorluk tarama değil, kayıp önlemedir. Swiftech, sepete konan her ürünün okutulan ve ödenen ürünle eşleştiğini çok katmanlı bir doğrulama mimarisiyle güvence altına alıyor: barkod okuma, ağırlık doğrulama, bilgisayarlı görü ve davranış analizi birlikte çalışıyor. Bu katmanların entegrasyonu, kolayca kopyalanamayan ve şirketin asıl teknolojik değerini oluşturan yapıdır.",
+    },
+    {
+      lead: "Neden ölçeklenebilir bir iş modeli.",
+      body:
+        "Panelimiz mevcut arabalara sonradan takıldığı için market, filosunu yenilemek zorunda kalmıyor. Bu, rakip çözümlerin en büyük engeli olan yüksek kurulum maliyetini ortadan kaldırıyor; benimsemeyi hızlandırıyor ve teknolojiyi yalnızca büyük zincirlerin değil, orta ölçekli perakendenin de erişebileceği bir noktaya taşıyor. Donanımın yanında, abonelik bazlı yazılım ve veri hizmetleriyle tekrar eden gelir modeli kuruyoruz.",
+    },
+    {
+      lead: "Donanımın ötesinde: veri.",
+      body:
+        "Her panel aynı zamanda bir veri toplama noktasıdır. Müşteri davranışı, kampanya etkinliği ve satış örüntüleri hakkında marketin bugüne kadar erişemediği veriyi, aksiyon alınabilir bir analitik katmanına dönüştürüyoruz. Ayrıca ekran, mağaza içi reklam ve kişiselleştirilmiş kampanyalar için yeni bir gelir kanalı yaratıyor. Böylece tek bir cihaz üç iş modeline hizmet ediyor: operasyonel verimlilik, veri ve perakende medyası.",
+    },
+    {
+      lead: "Pazar.",
+      body:
+        "Küresel akıllı perakende ve sürtünmesiz alışveriş pazarı, artan personel maliyetleri ve değişen tüketici beklentileriyle hızla büyüyor. Swiftech, bu büyümenin en pratik ve en hızlı benimsenebilir giriş noktasında konumlanıyor: pahalı mağaza yenileme projeleri değil, mevcut altyapıya takılan, ilk günden değer üreten bir çözüm.",
+    },
+    {
+      lead: "Ekip ve yaklaşım.",
+      body:
+        "Swiftech'i mühendislik disipliniyle yönetiyoruz. Bir çözümün ne kadar hızlı sahaya çıktığı kadar, sahada ne kadar istikrarlı çalıştığıyla da ölçülüyoruz; çünkü perakende, kesintiyi affetmeyen bir sektördür. Adımızdaki \"swift\" hem müşteriye kazandırdığımız hızı hem de pazara çıkış disiplinimizi ifade eder.",
+    },
+  ],
+  closing:
+    "Swiftech, alışverişin en verimsiz anını ortadan kaldırıyor ve bunu yaparken perakendeye operasyon, veri ve gelir olmak üzere üç boyutta değer üretiyor.",
+}
 
-export const whyOkuGor = {
-  retailer: {
-    title: "Perakendeci için",
-    items: [
-      "Kasa önündeki yoğunluk ve bekleme süresi azalır",
-      "Müşteri sepeti kasaya gelmeden önce hazır — checkout hızlanır",
-      "Bağlantı ve okuma hatalarını anlık gösteren sistem, operasyonel sorunları erken yakalar",
-    ],
-  },
-  customer: {
-    title: "Müşteri için",
-    items: [
-      "Alışveriş boyunca toplam tutarı sürekli görür, kasada sürpriz yaşamaz",
-      "Kamerayla barkod okutmak kadar basit, ekstra bir öğrenme gerekmez",
-      "Kasada bekleme süresi kısalır, alışveriş daha keyifli hale gelir",
-    ],
-  },
+export const iletisim = {
+  eyebrow: "İletişim",
+  intro:
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum euismod, nunc ut aliquam laoreet, elit velit fermentum enim, id ullamcorper nibh justo sed nulla. Praesent sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris.",
 }
 
 export const contactInterests = [
@@ -134,6 +117,37 @@ export const contactInfo = {
   address: "Adres bilgisi eklenecek",
 }
 
+export const kariyer = {
+  eyebrow: "Kariyer",
+  intro:
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  positions: [
+    {
+      index: "01",
+      title: "Açık Pozisyon",
+      body: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    },
+    {
+      index: "02",
+      title: "Açık Pozisyon",
+      body: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+    },
+  ],
+}
+
 export const footer = {
   tagline: "Alışverişin yeni adresi.",
+  company: [
+    { href: "#hakkimizda", label: "Hakkımızda" },
+    { href: "#projeler", label: "Projeler" },
+  ],
+  joinUs: [
+    { href: "#kariyer", label: "Kariyer" },
+    { href: "#iletisim", label: "İletişim" },
+  ],
+  social: [
+    { href: "#", label: "LinkedIn" },
+    { href: "#", label: "Instagram" },
+    { href: "#", label: "X" },
+  ],
 }

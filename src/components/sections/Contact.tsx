@@ -22,9 +22,8 @@ import {
   FieldGroup,
   FieldLabel,
 } from "@/components/ui/field"
-import { GridGlow } from "@/components/illustrations/GridGlow"
 import { Reveal, RevealItem } from "@/components/motion/Reveal"
-import { contactInfo, contactInterests } from "@/data/content"
+import { contactInfo, contactInterests, iletisim } from "@/data/content"
 
 const schema = z.object({
   name: z.string().trim().min(2, "Ad soyad en az 2 karakter olmalı"),
@@ -92,42 +91,36 @@ export function Contact() {
   }
 
   return (
-    <section id="iletisim" className="relative overflow-hidden bg-navy-950 py-20 sm:py-28">
-      <GridGlow />
-      <div className="relative mx-auto grid max-w-6xl gap-12 px-6 lg:grid-cols-5 lg:gap-16">
-        <Reveal className="lg:col-span-2">
+    <section id="iletisim" className="relative overflow-hidden bg-black py-24 sm:py-32">
+      <div className="relative mx-auto max-w-[1600px] px-4 sm:px-6 lg:px-10">
+        <h2 className="text-h2 text-white">{iletisim.eyebrow}</h2>
+
+        <div className="mt-12 grid gap-[2px] sm:mt-16 lg:grid-cols-5">
+        <Reveal className="bg-gray-950 p-6 sm:p-8 lg:col-span-2">
           <RevealItem>
-            <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-              Demo Talep Edin
-            </h2>
+            <p className="text-body text-base">{iletisim.intro}</p>
           </RevealItem>
           <RevealItem>
-            <p className="mt-4 text-lg leading-relaxed text-slate-300">
-              Perakendeci ya da yatırımcı olarak OkuGör Dijital Sepet hakkında konuşmak
-              ister misiniz? Formu doldurun, ekibimiz size dönüş yapsın.
-            </p>
-          </RevealItem>
-          <RevealItem>
-            <ul className="mt-8 space-y-4 text-sm text-slate-300">
-              <li className="flex items-center gap-3">
-                <Mail className="size-4 text-blue-400" aria-hidden="true" />
+            <ul className="mt-8 space-y-4">
+              <li className="flex items-center gap-3 text-body">
+                <Mail className="size-4 text-lime" aria-hidden="true" />
                 {contactInfo.email}
               </li>
-              <li className="flex items-center gap-3">
-                <Phone className="size-4 text-blue-400" aria-hidden="true" />
+              <li className="flex items-center gap-3 text-body">
+                <Phone className="size-4 text-lime" aria-hidden="true" />
                 {contactInfo.phone}
               </li>
-              <li className="flex items-center gap-3">
-                <MapPin className="size-4 text-blue-400" aria-hidden="true" />
+              <li className="flex items-center gap-3 text-body">
+                <MapPin className="size-4 text-lime" aria-hidden="true" />
                 {contactInfo.address}
               </li>
             </ul>
           </RevealItem>
         </Reveal>
 
-        <Reveal className="lg:col-span-3">
+        <Reveal className="bg-gray-950 lg:col-span-3">
           <RevealItem>
-            <div className="rounded-2xl bg-white p-8 shadow-2xl sm:p-10">
+            <div className="p-6 sm:p-8">
               <form onSubmit={handleSubmit(onSubmit)} noValidate>
                 <FieldGroup>
                   <div className="grid gap-5 sm:grid-cols-2">
@@ -229,6 +222,7 @@ export function Contact() {
             </div>
           </RevealItem>
         </Reveal>
+        </div>
       </div>
     </section>
   )

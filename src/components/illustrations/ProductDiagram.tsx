@@ -49,8 +49,8 @@ export function ProductDiagram({ className }: { className?: string }) {
     >
       <defs>
         <linearGradient id="basket-fill" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="var(--color-blue-500)" stopOpacity="0.18" />
-          <stop offset="100%" stopColor="var(--color-blue-600)" stopOpacity="0.05" />
+          <stop offset="0%" stopColor="var(--color-white)" stopOpacity="0.12" />
+          <stop offset="100%" stopColor="var(--color-white)" stopOpacity="0.02" />
         </linearGradient>
       </defs>
 
@@ -64,18 +64,18 @@ export function ProductDiagram({ className }: { className?: string }) {
         {/* Kulp */}
         <path
           d="M170,96 C170,36 270,36 270,96"
-          stroke="var(--color-slate-900)"
+          stroke="var(--color-white)"
           strokeWidth={6}
           strokeLinecap="round"
           fill="none"
         />
         {/* Rim */}
-        <rect x={56} y={92} width={308} height={22} rx={9} fill="var(--color-blue-600)" />
+        <rect x={56} y={92} width={308} height={22} rx={9} fill="var(--color-white)" />
         {/* Gövde */}
         <path
           d="M100,114 L340,114 L318,340 L122,340 Z"
           fill="url(#basket-fill)"
-          stroke="var(--color-blue-600)"
+          stroke="var(--color-white)"
           strokeWidth={3}
           strokeLinejoin="round"
         />
@@ -87,8 +87,8 @@ export function ProductDiagram({ className }: { className?: string }) {
             y1={118}
             x2={slatXsBottom[i]}
             y2={336}
-            stroke="var(--color-blue-600)"
-            strokeOpacity={0.35}
+            stroke="var(--color-gray-400)"
+            strokeOpacity={0.4}
             strokeWidth={2}
           />
         ))}
@@ -99,24 +99,24 @@ export function ProductDiagram({ className }: { className?: string }) {
           y={150}
           width={80}
           height={112}
-          rx={12}
-          fill="var(--color-navy-950)"
-          stroke="var(--color-blue-500)"
+          rx={2}
+          fill="var(--color-gray-950)"
+          stroke="var(--color-gray-300)"
           strokeWidth={2.5}
         />
-        <rect x={349} y={160} width={62} height={78} rx={5} fill="var(--color-navy-900)" />
-        <rect x={355} y={168} width={50} height={8} rx={2} fill="var(--color-blue-500)" opacity={0.6} />
-        <rect x={355} y={182} width={38} height={6} rx={2} fill="var(--color-slate-600)" opacity={0.8} />
-        <rect x={355} y={194} width={44} height={6} rx={2} fill="var(--color-slate-600)" opacity={0.6} />
+        <rect x={349} y={160} width={62} height={78} rx={2} fill="var(--color-gray-900)" />
+        <rect x={355} y={168} width={50} height={8} rx={2} fill="var(--color-gray-300)" opacity={0.6} />
+        <rect x={355} y={182} width={38} height={6} rx={2} fill="var(--color-gray-500)" opacity={0.8} />
+        <rect x={355} y={194} width={44} height={6} rx={2} fill="var(--color-gray-500)" opacity={0.6} />
 
-        {/* Kamera noktası */}
-        <circle cx={380} cy={250} r={6} fill="var(--color-brand-orange)" />
+        {/* Kamera noktası — sayfadaki tek accent (lime) kullanım anı */}
+        <circle cx={380} cy={250} r={6} fill="var(--color-lime)" />
         {!reduceMotion && (
           <motion.circle
             cx={380}
             cy={250}
             fill="none"
-            stroke="var(--color-brand-orange)"
+            stroke="var(--color-lime)"
             strokeWidth={2}
             initial={{ r: 6, opacity: 0.7 }}
             animate={{ r: [6, 16, 6], opacity: [0.7, 0, 0.7] }}
@@ -137,13 +137,13 @@ export function ProductDiagram({ className }: { className?: string }) {
             },
           }}
         >
-          <circle cx={c.anchor.x} cy={c.anchor.y} r={3.5} fill="var(--color-brand-orange)" />
+          <circle cx={c.anchor.x} cy={c.anchor.y} r={3.5} fill="var(--color-lime)" />
           <motion.line
             x1={c.anchor.x}
             y1={c.anchor.y}
             x2={c.lineEnd.x}
             y2={c.lineEnd.y}
-            stroke="var(--color-blue-400)"
+            stroke="var(--color-gray-500)"
             strokeWidth={1.5}
             strokeDasharray="4 3"
             initial={reduceMotion ? undefined : { pathLength: 0 }}
@@ -155,7 +155,7 @@ export function ProductDiagram({ className }: { className?: string }) {
             y={c.lineEnd.y}
             textAnchor={c.align}
             dominantBaseline="middle"
-            className="fill-slate-200 text-[13px] font-medium font-sans"
+            className="fill-gray-300 text-[13px] font-medium font-sans"
           >
             {c.label}
           </text>

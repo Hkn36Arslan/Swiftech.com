@@ -1,7 +1,6 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Menu, X } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { OkuGorLogo } from "@/components/layout/Logo"
+import { SwiftechLogo } from "@/components/layout/Logo"
 import { nav } from "@/data/content"
 import { useActiveSection } from "@/hooks/useActiveSection"
 import { cn } from "@/lib/utils"
@@ -10,16 +9,31 @@ const sectionIds = nav.map((item) => item.href.replace("#", ""))
 
 export function Header() {
   const [open, setOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
   const activeId = useActiveSection(sectionIds)
 
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8)
+    onScroll()
+    window.addEventListener("scroll", onScroll, { passive: true })
+    return () => window.removeEventListener("scroll", onScroll)
+  }, [])
+
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-white/85 backdrop-blur-md">
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
-        <a href="#" className="shrink-0" aria-label="OkuGör ana sayfa">
-          <OkuGorLogo />
+    <header
+      className={cn(
+        "fixed inset-x-0 top-0 z-50 border-b transition-[background-color,backdrop-filter,border-color] duration-[var(--duration-header)] ease-[var(--ease-standard)]",
+        scrolled
+          ? "border-hairline bg-black/85 backdrop-blur-md"
+          : "border-transparent bg-transparent"
+      )}
+    >
+      <div className="mx-auto flex h-16 max-w-[1600px] items-center justify-between px-4 sm:px-6 lg:px-10">
+        <a href="#" className="shrink-0" aria-label="Swiftech ana sayfa">
+          <SwiftechLogo />
         </a>
 
-        <nav className="hidden items-center gap-8 md:flex" aria-label="Ana navigasyon">
+        <nav className="hidden items-center gap-9 md:flex" aria-label="Ana navigasyon">
           {nav.map((item) => {
             const id = item.href.replace("#", "")
             const isActive = activeId === id
@@ -28,8 +42,10 @@ export function Header() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "text-sm font-medium transition-colors hover:text-blue-600",
-                  isActive ? "text-blue-600" : "text-slate-600"
+                  "text-nav border-b pb-0.5 transition-colors duration-[var(--duration-base)]",
+                  isActive
+                    ? "border-lime text-white"
+                    : "border-transparent text-gray-400 hover:border-lime hover:text-white"
                 )}
                 aria-current={isActive ? "true" : undefined}
               >
@@ -40,14 +56,17 @@ export function Header() {
         </nav>
 
         <div className="hidden md:block">
-          <Button asChild size="lg">
-            <a href="#iletisim">Demo Talep Et</a>
-          </Button>
+          <a
+            href="#iletisim"
+            className="rounded-[var(--radius)] border border-lime px-5 py-2 text-nav text-white transition-colors duration-[var(--duration-base)] hover:bg-lime hover:text-black"
+          >
+            Demo Talep Et
+          </a>
         </div>
 
         <button
           type="button"
-          className="inline-flex size-10 items-center justify-center rounded-lg text-slate-700 md:hidden"
+          className="inline-flex size-10 items-center justify-center text-white md:hidden"
           aria-label={open ? "Menüyü kapat" : "Menüyü aç"}
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
@@ -58,25 +77,29 @@ export function Header() {
 
       {open && (
         <nav
-          className="border-t border-slate-200 bg-white px-6 py-4 md:hidden"
+          className="border-t border-hairline bg-black px-4 py-4 sm:px-6 md:hidden"
           aria-label="Mobil navigasyon"
         >
-          <ul className="flex flex-col gap-4">
+          <ul className="flex flex-col gap-1">
             {nav.map((item) => (
               <li key={item.href}>
                 <a
                   href={item.href}
-                  className="block text-base font-medium text-slate-700"
+                  className="text-nav block py-3 text-white"
                   onClick={() => setOpen(false)}
                 >
                   {item.label}
                 </a>
               </li>
             ))}
-            <li>
-              <Button asChild size="lg" className="w-full" onClick={() => setOpen(false)}>
-                <a href="#iletisim">Demo Talep Et</a>
-              </Button>
+            <li className="pt-2">
+              <a
+                href="#iletisim"
+                className="block rounded-[var(--radius)] border border-lime px-5 py-3 text-center text-nav text-white"
+                onClick={() => setOpen(false)}
+              >
+                Demo Talep Et
+              </a>
             </li>
           </ul>
         </nav>
