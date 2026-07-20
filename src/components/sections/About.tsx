@@ -7,7 +7,7 @@ import { about } from "@/data/content"
  */
 export function About() {
   return (
-    <section id="hakkimizda" className="min-h-screen bg-black py-24 sm:py-32">
+    <section id="hakkimizda" className="min-h-screen bg-graphite py-24 sm:py-32">
       <div className="mx-auto max-w-[1600px] px-4 sm:px-6 lg:px-10">
         <h2 className="text-h2 text-white">{about.eyebrow}</h2>
         <p className="mt-8 max-w-3xl text-xl leading-relaxed text-white/90 sm:text-2xl">

@@ -31,6 +31,12 @@
   --color-gray-400: #8a8a8a;
   --color-gray-300: #b3b3b3;
   --color-hairline: rgb(255 255 255 / 10%);
+  --color-hairline-on-light: rgb(0 0 0 / 12%);
+  /* Section-rhythm tonu: referans sitedeki Arsenal-1 bandının siyahtan
+     belirgin şekilde ayrışan koyu-gri bloğuna karşılık gelir (design-system.md
+     "arkaplan rengi geçişleriyle ayrışır" kuralı) — monokrom kalması için
+     renkli/yeşilimsi değil, nötr koyu gri. */
+  --color-graphite: #242424;
 
   /* Primitive: tek accent renk — rgba(223,241,64,1) = #dff140. Sadece mikro
      etkileşimlerde kullanılır (hover underline, focus ring, ince CTA border,
@@ -123,6 +129,29 @@
   --sidebar-ring: var(--color-lime);
 }
 
+/* Referans sitedeki "News & Insights" gibi tersine çevrilmiş (beyaz zeminli)
+   section'lar için kapsamlı token override — design-system.md'nin kendi
+   --bg/--text çiftini (siyah/beyaz) tersine kullanır, yeni bir renk
+   eklemez. shadcn primitive'leri (Input/Select/Checkbox/Button) semantic
+   token'lara bağlı olduğu için bu scope içinde otomatik uyum sağlar. */
+.section-light {
+  --background: var(--color-white);
+  --foreground: var(--color-black);
+  --card: #f4f4f4;
+  --card-foreground: var(--color-black);
+  --popover: var(--color-white);
+  --popover-foreground: var(--color-black);
+  --primary: var(--color-black);
+  --primary-foreground: var(--color-white);
+  --secondary: #ececec;
+  --secondary-foreground: var(--color-black);
+  --muted: #ececec;
+  --muted-foreground: #525252;
+  --border: var(--color-hairline-on-light);
+  --input: var(--color-hairline-on-light);
+  --ring: var(--color-lime);
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -195,12 +224,13 @@
 @utility text-body {
   font-size: 0.875rem;
   line-height: 1.6;
-  color: var(--color-gray-400);
+  color: var(--muted-foreground);
 }
 @utility text-caption {
   font-size: 0.75rem;
   line-height: 1.4;
-  color: var(--color-gray-500);
+  color: var(--muted-foreground);
+  opacity: 0.75;
 }
 
 /* 12 kolonlu grid — sitenin tüm layout'unun temeli */

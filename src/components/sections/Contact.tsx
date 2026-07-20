@@ -91,12 +91,15 @@ export function Contact() {
   }
 
   return (
-    <section id="iletisim" className="relative overflow-hidden bg-black py-24 sm:py-32">
+    <section
+      id="iletisim"
+      className="section-light relative overflow-hidden bg-background py-24 text-foreground sm:py-32"
+    >
       <div className="relative mx-auto max-w-[1600px] px-4 sm:px-6 lg:px-10">
-        <h2 className="text-h2 text-white">{iletisim.eyebrow}</h2>
+        <h2 className="text-h2">{iletisim.eyebrow}</h2>
 
         <div className="mt-12 grid gap-[2px] sm:mt-16 lg:grid-cols-5">
-        <Reveal className="bg-gray-950 p-6 sm:p-8 lg:col-span-2">
+        <Reveal className="bg-card p-6 sm:p-8 lg:col-span-2">
           <RevealItem>
             <p className="text-body text-base">{iletisim.intro}</p>
           </RevealItem>
@@ -118,7 +121,7 @@ export function Contact() {
           </RevealItem>
         </Reveal>
 
-        <Reveal className="bg-gray-950 lg:col-span-3">
+        <Reveal className="bg-card lg:col-span-3">
           <RevealItem>
             <div className="p-6 sm:p-8">
               <form onSubmit={handleSubmit(onSubmit)} noValidate>

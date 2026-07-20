@@ -6,7 +6,7 @@ export function SwiftechLogo({ className }: { className?: string }) {
     <img
       src={logoUrl}
       alt="Swiftech"
-      className={cn("h-7 w-auto object-contain sm:h-8", className)}
+      className={cn("h-10 w-auto object-contain sm:h-12", className)}
     />
   )
 }
