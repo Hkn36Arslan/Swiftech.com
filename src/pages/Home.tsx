@@ -1,6 +1,5 @@
 import { lazy, Suspense, useEffect } from "react"
 import { Hero } from "@/components/sections/Hero"
-import { FeaturedBand } from "@/components/sections/FeaturedBand"
 import { Projects } from "@/components/sections/Projects"
 import { About } from "@/components/sections/About"
 
@@ -47,7 +46,6 @@ export function Home() {
       </a>
       <main id="main">
         <Hero />
-        <FeaturedBand />
         <Projects />
         <About />
         <Suspense fallback={<div className="min-h-screen bg-black" aria-hidden="true" />}>

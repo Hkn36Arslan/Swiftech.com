@@ -2,6 +2,7 @@ import { useEffect } from "react"
 import { Link, Navigate, useParams } from "react-router-dom"
 import { ArrowLeft, ArrowRight } from "lucide-react"
 import { motion, useReducedMotion } from "framer-motion"
+import { ThreeDPhotoCarousel } from "@/components/ui/3d-carousel"
 import { projects } from "@/data/content"
 
 export function ProjectDetail() {
@@ -48,17 +49,14 @@ export function ProjectDetail() {
           </div>
 
           {project.gallery.length > 0 && (
-            <div className="mt-16 grid grid-cols-1 gap-[2px] sm:mt-20 sm:grid-cols-2">
-              {project.gallery.map((src, i) => (
-                <div key={src} className="aspect-square overflow-hidden bg-gray-950">
-                  <img
-                    src={src}
-                    alt={`${project.title} — görsel ${i + 2}`}
-                    loading="lazy"
-                    className="h-full w-full object-cover"
-                  />
-                </div>
-              ))}
+            <div className="mt-16 sm:mt-20">
+              <h2 className="text-h3 text-white">Galeri</h2>
+              <p className="text-body mt-2 max-w-md">
+                Sürükleyerek çevirin, bir görsele tıklayarak büyütün.
+              </p>
+              <div className="mt-8">
+                <ThreeDPhotoCarousel images={project.gallery} />
+              </div>
             </div>
           )}
 
