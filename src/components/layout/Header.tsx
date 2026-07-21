@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { useLocation } from "react-router-dom"
 import { Menu, X } from "lucide-react"
 import { SwiftechLogo } from "@/components/layout/Logo"
@@ -10,28 +10,13 @@ const sectionIds = nav.map((item) => item.href.split("#")[1])
 
 export function Header() {
   const [open, setOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
   const location = useLocation()
   const isHome = location.pathname === "/"
   const observedActiveId = useActiveSection(sectionIds, location.pathname)
   const activeId = isHome ? observedActiveId : null
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8)
-    onScroll()
-    window.addEventListener("scroll", onScroll, { passive: true })
-    return () => window.removeEventListener("scroll", onScroll)
-  }, [])
-
   return (
-    <header
-      className={cn(
-        "fixed inset-x-0 top-0 z-50 border-b transition-[background-color,backdrop-filter,border-color] duration-[var(--duration-header)] ease-[var(--ease-standard)]",
-        scrolled
-          ? "border-hairline bg-black/85 backdrop-blur-md"
-          : "border-transparent bg-transparent"
-      )}
-    >
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-hairline bg-black">
       <div className="mx-auto flex h-16 max-w-[1600px] items-center justify-between px-4 sm:px-6 lg:px-10">
         <a href="/" className="shrink-0" aria-label="Swiftech ana sayfa">
           <SwiftechLogo />
