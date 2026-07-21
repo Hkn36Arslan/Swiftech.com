@@ -85,17 +85,27 @@ export function Header() {
           aria-label="Mobil navigasyon"
         >
           <ul className="flex flex-col gap-1">
-            {nav.map((item) => (
-              <li key={item.href}>
-                <a
-                  href={item.href}
-                  className="text-nav block py-3 text-white"
-                  onClick={() => setOpen(false)}
-                >
-                  {item.label}
-                </a>
-              </li>
-            ))}
+            {nav.map((item) => {
+              const id = item.href.split("#")[1]
+              const isActive = activeId === id
+              return (
+                <li key={item.href}>
+                  <a
+                    href={item.href}
+                    className={cn(
+                      "text-nav block border-l-2 py-3 pl-3 transition-colors duration-[var(--duration-base)]",
+                      isActive
+                        ? "border-lime text-white"
+                        : "border-transparent text-gray-400"
+                    )}
+                    aria-current={isActive ? "true" : undefined}
+                    onClick={() => setOpen(false)}
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              )
+            })}
             <li className="pt-2">
               <a
                 href="/#iletisim"
