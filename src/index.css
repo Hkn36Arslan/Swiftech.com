@@ -118,8 +118,12 @@
   --secondary-foreground: var(--color-white);
   --muted: var(--color-gray-900);
   --muted-foreground: var(--color-gray-400);
-  --accent: var(--color-lime);
-  --accent-foreground: var(--color-black);
+  /* Not: shadcn'ın semantic "accent" token'ı (menü/select item hover bg'i)
+     ile design-system.md'nin marka accent'i (lime) farklı kavramlar —
+     lime yalnızca bilinçli olarak seçilmiş yerlerde (bg-lime/border-lime/
+     text-lime) kullanılır, bu yüzden burada nötr bir hover tonu kullanılır. */
+  --accent: var(--color-gray-900);
+  --accent-foreground: var(--color-white);
   --destructive: var(--color-destructive-raw);
   --border: var(--color-hairline);
   --input: var(--color-hairline);

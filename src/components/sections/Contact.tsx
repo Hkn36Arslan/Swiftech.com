@@ -119,7 +119,7 @@ export function Contact() {
               {contactRows.map(({ icon: Icon, label, value, href }) => {
                 const content = (
                   <>
-                    <span className="flex size-11 shrink-0 items-center justify-center border text-lime transition-colors duration-[var(--duration-base)] group-hover:border-lime">
+                    <span className="flex size-11 shrink-0 items-center justify-center border text-foreground transition-colors duration-[var(--duration-base)] group-hover:border-foreground/40 group-hover:bg-foreground/5">
                       <Icon className="size-4" aria-hidden="true" />
                     </span>
                     <span>
