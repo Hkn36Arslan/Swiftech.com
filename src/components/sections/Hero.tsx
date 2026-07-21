@@ -3,18 +3,7 @@ import { motion, useReducedMotion } from "framer-motion"
 import { AbstractPlaceholder } from "@/components/illustrations/AbstractPlaceholder"
 import { RadarSweep } from "@/components/illustrations/RadarSweep"
 import { hero } from "@/data/content"
-
-/**
- * Kurumsal arka plan videosu geldiğinde: video dosyasını `src/assets/`'e
- * ekleyip aşağıdaki satırı aç (örn. `import heroVideoSrc from
- * "@/assets/hero-video.mp4"`), `heroVideoSrc` sabitini o import'a eşitle.
- * `heroVideoSrc` tanımlıyken full-bleed `<video>` katmanı otomatik devreye
- * girer; tanımsızken nötr/soyut placeholder gösterilir. Oku Gör'e özel
- * görsel kasıtlı olarak kullanılmıyor — Swiftech tek başına Oku Gör
- * değil, bkz. reference/content-hakkimizda.md.
- */
-// import heroVideoSrc from "@/assets/hero-video.mp4"
-const heroVideoSrc: string | undefined = undefined
+import heroVideoSrc from "@/assets/background.mp4"
 
 export function Hero() {
   const reduceMotion = useReducedMotion()
@@ -22,22 +11,22 @@ export function Hero() {
   return (
     <section id="hero" className="relative min-h-screen overflow-hidden bg-black">
       <div className="absolute inset-0" aria-hidden="true">
-        {heroVideoSrc ? (
+        {heroVideoSrc && !reduceMotion ? (
           <motion.video
             src={heroVideoSrc}
             autoPlay
             muted
             loop
             playsInline
-            initial={reduceMotion ? undefined : { opacity: 0, scale: 1.04 }}
-            animate={reduceMotion ? undefined : { opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, scale: 1.04 }}
+            animate={{ opacity: 0.55, scale: 1 }}
             transition={{ duration: 0.9, ease: "easeOut" }}
             className="h-full w-full object-cover"
           />
         ) : (
           <>
             <AbstractPlaceholder seed="b" bold className="absolute inset-0" />
-            <RadarSweep originX="72%" originY="32%" />
+            {!reduceMotion && <RadarSweep originX="72%" originY="32%" />}
           </>
         )}
         <div

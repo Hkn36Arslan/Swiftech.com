@@ -13,6 +13,10 @@ dist-ssr
 *.local
 .wrangler
 
+# Ham video kaynakları (büyük dosyalar) — sadece optimize edilmiş
+# src/assets/*.mp4 versiyonu repoya gider, ham kaynak yerelde kalır.
+reference/video-source/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
