@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils"
-import logoUrl from "@/assets/swiftech-logo.png"
+import logoUrl from "@/assets/swiftech-logo-white.png"
 
 export function SwiftechLogo({ className }: { className?: string }) {
   return (

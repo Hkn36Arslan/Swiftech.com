@@ -1,6 +1,5 @@
 import { cn } from "@/lib/utils"
 import { AbstractPlaceholder } from "@/components/illustrations/AbstractPlaceholder"
-import { ProductDiagram } from "@/components/illustrations/ProductDiagram"
 import type { Project } from "@/data/content"
 
 export function ProjectCard({
@@ -22,12 +21,15 @@ export function ProjectCard({
       aria-label={`${project.title}${project.placeholder ? " — yakında" : ""}`}
     >
       <div className="absolute inset-0 transition-transform duration-[var(--duration-base)] ease-[var(--ease-standard)] group-hover:scale-105">
-        {project.placeholder ? (
-          <AbstractPlaceholder seed={placeholderSeed} />
+        {project.image ? (
+          <img
+            src={project.image}
+            alt=""
+            className="h-full w-full object-cover"
+            loading="lazy"
+          />
         ) : (
-          <div className="flex h-full w-full items-center justify-center bg-gray-950 p-8">
-            <ProductDiagram className="w-full max-w-[320px]" />
-          </div>
+          <AbstractPlaceholder seed={placeholderSeed} />
         )}
       </div>
       <div

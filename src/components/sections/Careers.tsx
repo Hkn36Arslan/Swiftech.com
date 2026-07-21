@@ -1,6 +1,6 @@
 import { kariyer } from "@/data/content"
 
-const blockShades = ["bg-gray-950", "bg-gray-900"] as const
+const blockShades = ["bg-olive", "bg-slate"] as const
 
 /**
  * Kariyer — referans sistemin "story card" deseni: 2 sütun, ayrık koyu
@@ -23,11 +23,16 @@ export function Careers() {
             >
               <div className="flex items-start justify-between">
                 <h3 className="text-h3 text-white">{position.title}</h3>
-                <span className="text-caption tabular-nums">
+                <span className="text-xs tabular-nums text-white/70">
                   PT — {position.index}/{String(kariyer.positions.length).padStart(2, "0")}
                 </span>
               </div>
-              <p className="text-body mt-6 max-w-sm">{position.body}</p>
+              {/* Bu blokların zemini (olive/slate) varsayılan gray-400 body
+                  rengiyle yeterli kontrast vermiyor (ölçüldü: ~2:1) — doğrudan
+                  beyaz/opaklık kombinasyonu WCAG AA'yı (≥4.5:1) karşılıyor. */}
+              <p className="mt-6 max-w-sm text-sm leading-relaxed text-white/80">
+                {position.body}
+              </p>
             </div>
           ))}
         </div>

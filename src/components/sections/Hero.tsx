@@ -1,6 +1,6 @@
 import { ArrowRight } from "lucide-react"
 import { motion, useReducedMotion } from "framer-motion"
-import { ProductDiagram } from "@/components/illustrations/ProductDiagram"
+import heroPhoto from "@/assets/oku-gor-hero.jpg"
 import { hero } from "@/data/content"
 
 export function Hero() {
@@ -8,36 +8,22 @@ export function Hero() {
 
   return (
     <section id="hero" className="relative min-h-screen overflow-hidden bg-black">
-      {/* Full-bleed görsel katman */}
+      {/* Full-bleed görsel katman — gerçek Oku Gör ürün fotoğrafı, referans
+          sistemin "full-bleed 16:9 cover" hero deseni */}
       <div className="absolute inset-0" aria-hidden="true">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle at 78% 42%, var(--color-gray-900) 0%, transparent 60%)",
-          }}
-        />
-        <svg className="absolute inset-0 h-full w-full opacity-[0.12]">
-          <defs>
-            <pattern id="hero-grid" width="48" height="48" patternUnits="userSpaceOnUse">
-              <path d="M48 0H0V48" fill="none" stroke="var(--color-gray-500)" strokeWidth="1" />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#hero-grid)" />
-        </svg>
-        <motion.div
-          initial={reduceMotion ? undefined : { opacity: 0, scale: 0.96 }}
+        <motion.img
+          src={heroPhoto}
+          alt=""
+          initial={reduceMotion ? undefined : { opacity: 0, scale: 1.04 }}
           animate={reduceMotion ? undefined : { opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="absolute right-[4%] top-1/2 w-[42%] min-w-[320px] -translate-y-1/2 sm:right-[8%]"
-        >
-          <ProductDiagram />
-        </motion.div>
+          transition={{ duration: 0.9, ease: "easeOut" }}
+          className="h-full w-full object-cover"
+        />
         <div
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(0deg, var(--color-black) 12%, transparent 45%), linear-gradient(90deg, var(--color-black) 8%, transparent 48%)",
+              "linear-gradient(0deg, var(--color-black) 18%, rgb(1 1 1 / 0.35) 45%, transparent 68%), linear-gradient(90deg, var(--color-black) 10%, transparent 55%), linear-gradient(180deg, rgb(1 1 1 / 0.55) 0%, transparent 14%)",
           }}
         />
       </div>

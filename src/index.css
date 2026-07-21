@@ -32,11 +32,16 @@
   --color-gray-300: #b3b3b3;
   --color-hairline: rgb(255 255 255 / 10%);
   --color-hairline-on-light: rgb(0 0 0 / 12%);
-  /* Section-rhythm tonu: referans sitedeki Arsenal-1 bandının siyahtan
-     belirgin şekilde ayrışan koyu-gri bloğuna karşılık gelir (design-system.md
-     "arkaplan rengi geçişleriyle ayrışır" kuralı) — monokrom kalması için
-     renkli/yeşilimsi değil, nötr koyu gri. */
-  --color-graphite: #242424;
+  /* Section-rhythm tonları — referans sitenin ekran görüntüsünden piksel
+     örneklemesiyle ölçülen gerçek değerler (design-system.md'nin "arkaplan
+     rengi geçişleriyle ayrışır" kuralı):
+     - Arsenal-1 tipi gri bant (Hakkımızda section'ı için).
+     - Story-card iki tonu (Kariyer section'ı için); açık ton, ham ölçülen
+       #8e9291 yerine WCAG AA body-text kontrastı (4.5:1) için #5c6266'ya
+       koyulaştırıldı — karakteri (soğuk açık gri) korunuyor. */
+  --color-graphite: #6d6e6a;
+  --color-olive: #505544;
+  --color-slate: #5c6266;
 
   /* Primitive: tek accent renk — rgba(223,241,64,1) = #dff140. Sadece mikro
      etkileşimlerde kullanılır (hover underline, focus ring, ince CTA border,
@@ -135,17 +140,19 @@
    eklemez. shadcn primitive'leri (Input/Select/Checkbox/Button) semantic
    token'lara bağlı olduğu için bu scope içinde otomatik uyum sağlar. */
 .section-light {
-  --background: var(--color-white);
+  /* Referanstan ölçülen gerçek değer (News & Insights bandı): #f1f0ea —
+     sıcak kırık-beyaz, saf #ffffff değil. */
+  --background: #f1f0ea;
   --foreground: var(--color-black);
-  --card: #f4f4f4;
+  --card: #e9e8e2;
   --card-foreground: var(--color-black);
-  --popover: var(--color-white);
+  --popover: #f1f0ea;
   --popover-foreground: var(--color-black);
   --primary: var(--color-black);
   --primary-foreground: var(--color-white);
-  --secondary: #ececec;
+  --secondary: #e3e2dc;
   --secondary-foreground: var(--color-black);
-  --muted: #ececec;
+  --muted: #e3e2dc;
   --muted-foreground: #525252;
   --border: var(--color-hairline-on-light);
   --input: var(--color-hairline-on-light);
@@ -180,8 +187,8 @@
     font-weight: 400;
   }
   ::selection {
-    background-color: var(--color-lime);
-    color: var(--color-black);
+    /* Referanstan ölçülen gerçek değer: rgba(223,241,64,.333) — tam opak değil */
+    background-color: rgb(223 241 64 / 33.3%);
   }
   a,
   button,

@@ -5,6 +5,8 @@
 // İletişim/Kariyer gövde metinleri şu an lorem ipsum — gerçek metin gelince
 // bu dosyadan değiştirilecek.
 
+import okuGorCardPhoto from "@/assets/oku-gor-card.jpg"
+
 export const nav = [
   { href: "#projeler", label: "Projeler" },
   { href: "#hakkimizda", label: "Hakkımızda" },
@@ -28,6 +30,7 @@ export type Project = {
   href: string
   placeholder: boolean
   span: "featured" | "half"
+  image?: string
 }
 
 export const projects: Project[] = [
@@ -39,6 +42,7 @@ export const projects: Project[] = [
     href: "#hero",
     placeholder: false,
     span: "featured",
+    image: okuGorCardPhoto,
   },
   {
     slug: "proje-2",
