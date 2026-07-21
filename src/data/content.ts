@@ -2,16 +2,20 @@
 // Hero: "OkuGör Dijital Sepet" tanıtım PDF'i + kullanıcı düzeltmesi (barkod
 // okuma artık ayrı bir tarayıcı değil, tabletin kamerası ile yapılıyor).
 // Hakkımızda: reference/content-hakkimizda.md (gerçek metin).
-// İletişim/Kariyer gövde metinleri şu an lorem ipsum — gerçek metin gelince
-// bu dosyadan değiştirilecek.
+// İletişim gövde metni şu an lorem ipsum — gerçek metin gelince bu dosyadan
+// değiştirilecek.
 
 import okuGorCardPhoto from "@/assets/oku-gor-card.jpg"
+import okuGorHeroPhoto from "@/assets/oku-gor-hero.jpg"
+import okuGorGallery1 from "@/assets/oku-gor-gallery-1.jpg"
+import okuGorGallery2 from "@/assets/oku-gor-gallery-2.jpg"
+import okuGorGallery3 from "@/assets/oku-gor-gallery-3.jpg"
+import okuGorGallery4 from "@/assets/oku-gor-gallery-4.jpg"
 
 export const nav = [
-  { href: "#projeler", label: "Projeler" },
-  { href: "#hakkimizda", label: "Hakkımızda" },
-  { href: "#iletisim", label: "İletişim" },
-  { href: "#kariyer", label: "Kariyer" },
+  { href: "/#projeler", label: "Projeler" },
+  { href: "/#hakkimizda", label: "Hakkımızda" },
+  { href: "/#iletisim", label: "İletişim" },
 ] as const
 
 export const hero = {
@@ -27,10 +31,11 @@ export type Project = {
   slug: string
   title: string
   description: string
-  href: string
   placeholder: boolean
-  span: "featured" | "half"
   image?: string
+  heroImage?: string
+  gallery?: string[]
+  detailBody?: string
 }
 
 export const projects: Project[] = [
@@ -39,26 +44,28 @@ export const projects: Project[] = [
     title: "Oku Gör",
     description:
       "Market arabasına entegre, kamera ile barkod okuyan dijital sepet paneli — kasada bekleme yok.",
-    href: "#hero",
     placeholder: false,
-    span: "featured",
     image: okuGorCardPhoto,
+    heroImage: okuGorHeroPhoto,
+    gallery: [okuGorGallery1, okuGorGallery2, okuGorGallery3, okuGorGallery4],
+    detailBody:
+      "Geliştirdiğimiz panel, standart bir market arabasına takılıyor ve arabayı bir \"hareketli akıllı kasaya\" dönüştürüyor. Müşteri ürünü sepete atarken barkodunu okutuyor, sepetini ve toplam tutarını anlık takip ediyor, alışverişini arabanın üzerinden ödeyip kasaya hiç uğramadan çıkıyor. Bu, mağaza içinde sürtünmesiz bir \"tara-ve-git\" deneyimidir.",
   },
   {
     slug: "proje-2",
     title: "Proje 2",
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    href: "#",
     placeholder: true,
-    span: "half",
+    detailBody:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
   },
   {
     slug: "proje-3",
     title: "Proje 3",
     description: "Sed do eiusmod tempor incididunt ut labore et dolore magna.",
-    href: "#",
     placeholder: true,
-    span: "half",
+    detailBody:
+      "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
   },
 ]
 
@@ -98,8 +105,6 @@ export const about = {
         "Swiftech'i mühendislik disipliniyle yönetiyoruz. Bir çözümün ne kadar hızlı sahaya çıktığı kadar, sahada ne kadar istikrarlı çalıştığıyla da ölçülüyoruz; çünkü perakende, kesintiyi affetmeyen bir sektördür. Adımızdaki \"swift\" hem müşteriye kazandırdığımız hızı hem de pazara çıkış disiplinimizi ifade eder.",
     },
   ],
-  closing:
-    "Swiftech, alışverişin en verimsiz anını ortadan kaldırıyor ve bunu yaparken perakendeye operasyon, veri ve gelir olmak üzere üç boyutta değer üretiyor.",
 }
 
 export const iletisim = {
@@ -121,33 +126,12 @@ export const contactInfo = {
   address: "Adres bilgisi eklenecek",
 }
 
-export const kariyer = {
-  eyebrow: "Kariyer",
-  intro:
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-  positions: [
-    {
-      index: "01",
-      title: "Açık Pozisyon",
-      body: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    },
-    {
-      index: "02",
-      title: "Açık Pozisyon",
-      body: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-    },
-  ],
-}
-
 export const footer = {
   tagline: "Alışverişin yeni adresi.",
   company: [
-    { href: "#hakkimizda", label: "Hakkımızda" },
-    { href: "#projeler", label: "Projeler" },
-  ],
-  joinUs: [
-    { href: "#kariyer", label: "Kariyer" },
-    { href: "#iletisim", label: "İletişim" },
+    { href: "/#hakkimizda", label: "Hakkımızda" },
+    { href: "/#projeler", label: "Projeler" },
+    { href: "/#iletisim", label: "İletişim" },
   ],
   social: [
     { href: "#", label: "LinkedIn" },

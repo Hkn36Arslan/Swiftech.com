@@ -1,16 +1,20 @@
 import { useEffect, useState } from "react"
+import { useLocation } from "react-router-dom"
 import { Menu, X } from "lucide-react"
 import { SwiftechLogo } from "@/components/layout/Logo"
 import { nav } from "@/data/content"
 import { useActiveSection } from "@/hooks/useActiveSection"
 import { cn } from "@/lib/utils"
 
-const sectionIds = nav.map((item) => item.href.replace("#", ""))
+const sectionIds = nav.map((item) => item.href.split("#")[1])
 
 export function Header() {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
-  const activeId = useActiveSection(sectionIds)
+  const location = useLocation()
+  const isHome = location.pathname === "/"
+  const observedActiveId = useActiveSection(sectionIds)
+  const activeId = isHome ? observedActiveId : null
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8)
@@ -29,13 +33,13 @@ export function Header() {
       )}
     >
       <div className="mx-auto flex h-16 max-w-[1600px] items-center justify-between px-4 sm:px-6 lg:px-10">
-        <a href="#" className="shrink-0" aria-label="Swiftech ana sayfa">
+        <a href="/" className="shrink-0" aria-label="Swiftech ana sayfa">
           <SwiftechLogo />
         </a>
 
         <nav className="hidden items-center gap-9 md:flex" aria-label="Ana navigasyon">
           {nav.map((item) => {
-            const id = item.href.replace("#", "")
+            const id = item.href.split("#")[1]
             const isActive = activeId === id
             return (
               <a
@@ -57,7 +61,7 @@ export function Header() {
 
         <div className="hidden md:block">
           <a
-            href="#iletisim"
+            href="/#iletisim"
             className="rounded-[var(--radius)] border border-lime px-5 py-2 text-nav text-white transition-colors duration-[var(--duration-base)] hover:bg-lime hover:text-black"
           >
             Demo Talep Et
@@ -94,7 +98,7 @@ export function Header() {
             ))}
             <li className="pt-2">
               <a
-                href="#iletisim"
+                href="/#iletisim"
                 className="block rounded-[var(--radius)] border border-lime px-5 py-3 text-center text-nav text-white"
                 onClick={() => setOpen(false)}
               >

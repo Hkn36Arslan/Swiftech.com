@@ -25,8 +25,6 @@ export function About() {
             </div>
           ))}
         </div>
-
-        <p className="text-h3 mt-16 max-w-3xl text-white sm:text-2xl">{about.closing}</p>
       </div>
     </section>
   )
