@@ -3,7 +3,7 @@ import { motion, useReducedMotion } from "framer-motion"
 import { AbstractPlaceholder } from "@/components/illustrations/AbstractPlaceholder"
 import { RadarSweep } from "@/components/illustrations/RadarSweep"
 import { hero } from "@/data/content"
-import heroVideoSrc from "@/assets/background.mp4"
+import heroVideoSrc from "@/assets/background2.mp4"
 
 export function Hero() {
   const reduceMotion = useReducedMotion()
