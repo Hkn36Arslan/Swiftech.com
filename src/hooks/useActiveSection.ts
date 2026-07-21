@@ -1,7 +1,13 @@
 import { useEffect, useState } from "react"
 
-/** Görünür alandaki bölüm id'sini takip eder — nav'da aktif linki vurgulamak için. */
-export function useActiveSection(ids: readonly string[]) {
+/**
+ * Görünür alandaki bölüm id'sini takip eder — nav'da aktif linki vurgulamak
+ * için. `resetKey` değiştiğinde (örn. route pathname) observer yeniden
+ * kurulur — aksi halde SPA route değişiminde (Header remount olmadığı için)
+ * eski/kaldırılmış DOM elemanlarını izlemeye devam eder ve aktif durum bir
+ * daha hiç güncellenmez.
+ */
+export function useActiveSection(ids: readonly string[], resetKey?: unknown) {
   const [activeId, setActiveId] = useState<string | null>(null)
 
   useEffect(() => {
@@ -9,7 +15,10 @@ export function useActiveSection(ids: readonly string[]) {
       .map((id) => document.getElementById(id))
       .filter((el): el is HTMLElement => el !== null)
 
-    if (elements.length === 0) return
+    if (elements.length === 0) {
+      setActiveId(null)
+      return
+    }
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -24,7 +33,8 @@ export function useActiveSection(ids: readonly string[]) {
 
     elements.forEach((el) => observer.observe(el))
     return () => observer.disconnect()
-  }, [ids])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ids, resetKey])
 
   return activeId
 }

@@ -31,41 +31,26 @@ export type Project = {
   slug: string
   title: string
   description: string
-  placeholder: boolean
-  image?: string
-  heroImage?: string
-  gallery?: string[]
-  detailBody?: string
+  image: string
+  heroImage: string
+  gallery: string[]
+  detailBody: string
 }
 
+// Şu an tek gerçek proje var (Oku Gör). Yeni projeler netleşince bu diziye
+// aynı şekilde eklenir — henüz var olmayan projeler için placeholder kart
+// eklenmiyor.
 export const projects: Project[] = [
   {
     slug: "oku-gor",
     title: "Oku Gör",
     description:
       "Market arabasına entegre, kamera ile barkod okuyan dijital sepet paneli — kasada bekleme yok.",
-    placeholder: false,
     image: okuGorCardPhoto,
     heroImage: okuGorHeroPhoto,
     gallery: [okuGorGallery1, okuGorGallery2, okuGorGallery3, okuGorGallery4],
     detailBody:
       "Geliştirdiğimiz panel, standart bir market arabasına takılıyor ve arabayı bir \"hareketli akıllı kasaya\" dönüştürüyor. Müşteri ürünü sepete atarken barkodunu okutuyor, sepetini ve toplam tutarını anlık takip ediyor, alışverişini arabanın üzerinden ödeyip kasaya hiç uğramadan çıkıyor. Bu, mağaza içinde sürtünmesiz bir \"tara-ve-git\" deneyimidir.",
-  },
-  {
-    slug: "proje-2",
-    title: "Proje 2",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    placeholder: true,
-    detailBody:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-  },
-  {
-    slug: "proje-3",
-    title: "Proje 3",
-    description: "Sed do eiusmod tempor incididunt ut labore et dolore magna.",
-    placeholder: true,
-    detailBody:
-      "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
   },
 ]
 

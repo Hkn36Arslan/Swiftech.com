@@ -13,7 +13,7 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false)
   const location = useLocation()
   const isHome = location.pathname === "/"
-  const observedActiveId = useActiveSection(sectionIds)
+  const observedActiveId = useActiveSection(sectionIds, location.pathname)
   const activeId = isHome ? observedActiveId : null
 
   useEffect(() => {

@@ -37,6 +37,14 @@ const schema = z.object({
 
 type ContactFormValues = z.infer<typeof schema>
 
+const contactRows = [
+  { icon: Mail, label: "E-posta", value: contactInfo.email, href: `mailto:${contactInfo.email}` },
+  { icon: Phone, label: "Telefon", value: contactInfo.phone, href: `tel:${contactInfo.phone.replace(/\s/g, "")}` },
+  { icon: MapPin, label: "Adres", value: contactInfo.address, href: undefined },
+] as const
+
+const inputClass = "h-11"
+
 export function Contact() {
   const {
     register,
@@ -96,135 +104,168 @@ export function Contact() {
       className="section-light relative overflow-hidden bg-background py-24 text-foreground sm:py-32"
     >
       <div className="relative mx-auto max-w-[1600px] px-4 sm:px-6 lg:px-10">
-        <h2 className="text-h2">{iletisim.eyebrow}</h2>
+        <div className="grid gap-16 lg:grid-cols-12 lg:gap-x-16">
+          <div className="lg:col-span-5">
+            <Reveal>
+              <RevealItem>
+                <h2 className="text-h1">{iletisim.eyebrow}</h2>
+              </RevealItem>
+              <RevealItem>
+                <p className="text-body mt-6 max-w-md text-base">{iletisim.intro}</p>
+              </RevealItem>
+            </Reveal>
 
-        <div className="mt-12 grid gap-[2px] sm:mt-16 lg:grid-cols-5">
-        <Reveal className="bg-card p-6 sm:p-8 lg:col-span-2">
-          <RevealItem>
-            <p className="text-body text-base">{iletisim.intro}</p>
-          </RevealItem>
-          <RevealItem>
-            <ul className="mt-8 space-y-4">
-              <li className="flex items-center gap-3 text-body">
-                <Mail className="size-4 text-lime" aria-hidden="true" />
-                {contactInfo.email}
-              </li>
-              <li className="flex items-center gap-3 text-body">
-                <Phone className="size-4 text-lime" aria-hidden="true" />
-                {contactInfo.phone}
-              </li>
-              <li className="flex items-center gap-3 text-body">
-                <MapPin className="size-4 text-lime" aria-hidden="true" />
-                {contactInfo.address}
-              </li>
-            </ul>
-          </RevealItem>
-        </Reveal>
+            <Reveal className="mt-12 flex flex-col gap-5">
+              {contactRows.map(({ icon: Icon, label, value, href }) => {
+                const content = (
+                  <>
+                    <span className="flex size-11 shrink-0 items-center justify-center border text-lime transition-colors duration-[var(--duration-base)] group-hover:border-lime">
+                      <Icon className="size-4" aria-hidden="true" />
+                    </span>
+                    <span>
+                      <span className="text-caption block uppercase tracking-wide">{label}</span>
+                      <span className="text-base">{value}</span>
+                    </span>
+                  </>
+                )
+                return (
+                  <RevealItem key={label}>
+                    {href ? (
+                      <a href={href} className="group flex items-center gap-4">
+                        {content}
+                      </a>
+                    ) : (
+                      <div className="flex items-center gap-4">{content}</div>
+                    )}
+                  </RevealItem>
+                )
+              })}
+            </Reveal>
+          </div>
 
-        <Reveal className="bg-card lg:col-span-3">
-          <RevealItem>
-            <div className="p-6 sm:p-8">
-              <form onSubmit={handleSubmit(onSubmit)} noValidate>
-                <FieldGroup>
-                  <div className="grid gap-5 sm:grid-cols-2">
-                    <Field data-invalid={!!errors.name}>
-                      <FieldLabel htmlFor="name">Ad Soyad</FieldLabel>
-                      <Input id="name" autoComplete="name" {...register("name")} />
-                      <FieldError errors={[errors.name]} />
-                    </Field>
-
-                    <Field data-invalid={!!errors.company}>
-                      <FieldLabel htmlFor="company">Şirket (opsiyonel)</FieldLabel>
-                      <Input id="company" autoComplete="organization" {...register("company")} />
-                      <FieldError errors={[errors.company]} />
-                    </Field>
-                  </div>
-
-                  <div className="grid gap-5 sm:grid-cols-2">
-                    <Field data-invalid={!!errors.email}>
-                      <FieldLabel htmlFor="email">E-posta</FieldLabel>
-                      <Input
-                        id="email"
-                        type="email"
-                        autoComplete="email"
-                        {...register("email")}
-                      />
-                      <FieldError errors={[errors.email]} />
-                    </Field>
-
-                    <Field data-invalid={!!errors.phone}>
-                      <FieldLabel htmlFor="phone">Telefon (opsiyonel)</FieldLabel>
-                      <Input
-                        id="phone"
-                        type="tel"
-                        autoComplete="tel"
-                        {...register("phone")}
-                      />
-                      <FieldError errors={[errors.phone]} />
-                    </Field>
-                  </div>
-
-                  <Field data-invalid={!!errors.interest}>
-                    <FieldLabel htmlFor="interest">İlgi Alanı</FieldLabel>
-                    <Controller
-                      name="interest"
-                      control={control}
-                      render={({ field }) => (
-                        <Select value={field.value} onValueChange={field.onChange}>
-                          <SelectTrigger id="interest" className="w-full">
-                            <SelectValue placeholder="Seçiniz" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            {contactInterests.map((option) => (
-                              <SelectItem key={option.value} value={option.value}>
-                                {option.label}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-                      )}
-                    />
-                    <FieldError errors={[errors.interest]} />
-                  </Field>
-
-                  <Field data-invalid={!!errors.message}>
-                    <FieldLabel htmlFor="message">Mesaj</FieldLabel>
-                    <Textarea id="message" rows={4} {...register("message")} />
-                    <FieldError errors={[errors.message]} />
-                  </Field>
-
-                  <Field orientation="horizontal" data-invalid={!!errors.consent}>
-                    <Controller
-                      name="consent"
-                      control={control}
-                      render={({ field }) => (
-                        <Checkbox
-                          id="consent"
-                          checked={field.value === true}
-                          onCheckedChange={(checked) => field.onChange(checked === true)}
+          <Reveal className="lg:col-span-7">
+            <RevealItem>
+              <div className="border p-6 sm:p-10">
+                <form onSubmit={handleSubmit(onSubmit)} noValidate>
+                  <FieldGroup className="gap-6">
+                    <div className="grid gap-6 sm:grid-cols-2">
+                      <Field data-invalid={!!errors.name}>
+                        <FieldLabel htmlFor="name">Ad Soyad</FieldLabel>
+                        <Input
+                          id="name"
+                          autoComplete="name"
+                          className={inputClass}
+                          {...register("name")}
                         />
-                      )}
-                    />
-                    <FieldContent>
-                      <FieldLabel htmlFor="consent" className="font-normal">
-                        Kişisel verilerimin KVKK kapsamında işlenmesini kabul ediyorum.
-                      </FieldLabel>
-                      <FieldDescription>
-                        Aydınlatma metni yakında bu alanda yayınlanacaktır.
-                      </FieldDescription>
-                      <FieldError errors={[errors.consent]} />
-                    </FieldContent>
-                  </Field>
+                        <FieldError errors={[errors.name]} />
+                      </Field>
 
-                  <Button type="submit" size="lg" disabled={isSubmitting} className="h-12">
-                    {isSubmitting && <Loader2 className="size-4 animate-spin" />}
-                    {isSubmitting ? "Gönderiliyor…" : "Gönder"}
-                  </Button>
-                </FieldGroup>
-              </form>
-            </div>
-          </RevealItem>
-        </Reveal>
+                      <Field data-invalid={!!errors.company}>
+                        <FieldLabel htmlFor="company">Şirket (opsiyonel)</FieldLabel>
+                        <Input
+                          id="company"
+                          autoComplete="organization"
+                          className={inputClass}
+                          {...register("company")}
+                        />
+                        <FieldError errors={[errors.company]} />
+                      </Field>
+                    </div>
+
+                    <div className="grid gap-6 sm:grid-cols-2">
+                      <Field data-invalid={!!errors.email}>
+                        <FieldLabel htmlFor="email">E-posta</FieldLabel>
+                        <Input
+                          id="email"
+                          type="email"
+                          autoComplete="email"
+                          className={inputClass}
+                          {...register("email")}
+                        />
+                        <FieldError errors={[errors.email]} />
+                      </Field>
+
+                      <Field data-invalid={!!errors.phone}>
+                        <FieldLabel htmlFor="phone">Telefon (opsiyonel)</FieldLabel>
+                        <Input
+                          id="phone"
+                          type="tel"
+                          autoComplete="tel"
+                          className={inputClass}
+                          {...register("phone")}
+                        />
+                        <FieldError errors={[errors.phone]} />
+                      </Field>
+                    </div>
+
+                    <Field data-invalid={!!errors.interest}>
+                      <FieldLabel htmlFor="interest">İlgi Alanı</FieldLabel>
+                      <Controller
+                        name="interest"
+                        control={control}
+                        render={({ field }) => (
+                          <Select value={field.value} onValueChange={field.onChange}>
+                            <SelectTrigger id="interest" className="h-11 w-full">
+                              <SelectValue placeholder="Seçiniz" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              {contactInterests.map((option) => (
+                                <SelectItem key={option.value} value={option.value}>
+                                  {option.label}
+                                </SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                        )}
+                      />
+                      <FieldError errors={[errors.interest]} />
+                    </Field>
+
+                    <Field data-invalid={!!errors.message}>
+                      <FieldLabel htmlFor="message">Mesaj</FieldLabel>
+                      <Textarea id="message" rows={5} {...register("message")} />
+                      <FieldError errors={[errors.message]} />
+                    </Field>
+
+                    <div className="border-t pt-6">
+                      <Field orientation="horizontal" data-invalid={!!errors.consent}>
+                        <Controller
+                          name="consent"
+                          control={control}
+                          render={({ field }) => (
+                            <Checkbox
+                              id="consent"
+                              checked={field.value === true}
+                              onCheckedChange={(checked) => field.onChange(checked === true)}
+                            />
+                          )}
+                        />
+                        <FieldContent>
+                          <FieldLabel htmlFor="consent" className="font-normal">
+                            Kişisel verilerimin KVKK kapsamında işlenmesini kabul ediyorum.
+                          </FieldLabel>
+                          <FieldDescription>
+                            Aydınlatma metni yakında bu alanda yayınlanacaktır.
+                          </FieldDescription>
+                          <FieldError errors={[errors.consent]} />
+                        </FieldContent>
+                      </Field>
+
+                      <Button
+                        type="submit"
+                        size="lg"
+                        disabled={isSubmitting}
+                        className="mt-6 h-12 w-full sm:w-auto"
+                      >
+                        {isSubmitting && <Loader2 className="size-4 animate-spin" />}
+                        {isSubmitting ? "Gönderiliyor…" : "Gönder"}
+                      </Button>
+                    </div>
+                  </FieldGroup>
+                </form>
+              </div>
+            </RevealItem>
+          </Reveal>
         </div>
       </div>
     </section>

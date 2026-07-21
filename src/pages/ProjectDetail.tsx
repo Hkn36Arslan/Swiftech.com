@@ -2,7 +2,6 @@ import { useEffect } from "react"
 import { Link, Navigate, useParams } from "react-router-dom"
 import { ArrowLeft, ArrowRight } from "lucide-react"
 import { motion, useReducedMotion } from "framer-motion"
-import { AbstractPlaceholder } from "@/components/illustrations/AbstractPlaceholder"
 import { projects } from "@/data/content"
 
 export function ProjectDetail() {
@@ -32,32 +31,23 @@ export function ProjectDetail() {
         </div>
 
         <div className="relative mt-8 aspect-[16/9] w-full overflow-hidden bg-gray-950 sm:mt-10">
-          {project.heroImage ? (
-            <motion.img
-              src={project.heroImage}
-              alt={project.title}
-              initial={reduceMotion ? undefined : { opacity: 0, scale: 1.03 }}
-              animate={reduceMotion ? undefined : { opacity: 1, scale: 1 }}
-              transition={{ duration: 0.7, ease: "easeOut" }}
-              className="h-full w-full object-cover"
-            />
-          ) : (
-            <AbstractPlaceholder seed="a" bold className="absolute inset-0" />
-          )}
+          <motion.img
+            src={project.heroImage}
+            alt={project.title}
+            initial={reduceMotion ? undefined : { opacity: 0, scale: 1.03 }}
+            animate={reduceMotion ? undefined : { opacity: 1, scale: 1 }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+            className="h-full w-full object-cover"
+          />
         </div>
 
         <div className="mx-auto max-w-[1600px] px-4 py-16 sm:px-6 sm:py-20 lg:px-10">
           <div className="max-w-3xl">
-            {project.placeholder && (
-              <span className="text-nav mb-4 inline-block border border-hairline px-3 py-1 text-gray-400">
-                Yakında
-              </span>
-            )}
             <h1 className="text-h1 text-white">{project.title}</h1>
-            <p className="text-body mt-6 text-base">{project.detailBody ?? project.description}</p>
+            <p className="text-body mt-6 text-base">{project.detailBody}</p>
           </div>
 
-          {project.gallery && project.gallery.length > 0 && (
+          {project.gallery.length > 0 && (
             <div className="mt-16 grid grid-cols-1 gap-[2px] sm:mt-20 sm:grid-cols-2">
               {project.gallery.map((src, i) => (
                 <div key={src} className="aspect-square overflow-hidden bg-gray-950">
