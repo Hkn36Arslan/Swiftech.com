@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom"
 import { ArrowUpRight } from "lucide-react"
+import { FluidParticles } from "@/components/illustrations/FluidParticles"
 import { Reveal, RevealItem } from "@/components/motion/Reveal"
 import { projects } from "@/data/content"
 
@@ -13,11 +14,12 @@ export function Projects() {
   const [project] = projects
 
   return (
-    <section id="projeler" className="min-h-screen bg-black py-24 sm:py-32">
-      <div className="mx-auto max-w-[1600px] px-4 sm:px-6 lg:px-10">
-        <h2 className="text-h2 text-white">Projeler</h2>
+    <section id="projeler" className="relative min-h-screen overflow-hidden bg-black py-24 sm:py-32">
+      <FluidParticles />
+      <div className="relative z-10 mx-auto max-w-[1600px] px-4 pointer-events-none sm:px-6 lg:px-10">
+        <h2 className="text-h2 pointer-events-auto text-white">Projeler</h2>
 
-        <Reveal className="mt-12 sm:mt-16">
+        <Reveal className="pointer-events-auto mt-12 sm:mt-16">
           <RevealItem>
             <Link
               to={`/projeler/${project.slug}`}

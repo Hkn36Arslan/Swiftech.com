@@ -6,7 +6,6 @@
 // değiştirilecek.
 
 import okuGorCardPhoto from "@/assets/oku-gor-card.jpg"
-import okuGorHeroPhoto from "@/assets/oku-gor-hero.jpg"
 import okuGorGallery1 from "@/assets/oku-gor-gallery-1.jpg"
 import okuGorGallery2 from "@/assets/oku-gor-gallery-2.jpg"
 import okuGorGallery3 from "@/assets/oku-gor-gallery-3.jpg"
@@ -32,7 +31,6 @@ export type Project = {
   title: string
   description: string
   image: string
-  heroImage: string
   gallery: string[]
   detailBody: string
 }
@@ -47,7 +45,6 @@ export const projects: Project[] = [
     description:
       "Market arabasına entegre, kamera ile barkod okuyan dijital sepet paneli — kasada bekleme yok.",
     image: okuGorCardPhoto,
-    heroImage: okuGorHeroPhoto,
     gallery: [okuGorGallery1, okuGorGallery2, okuGorGallery3, okuGorGallery4],
     detailBody:
       "Geliştirdiğimiz panel, standart bir market arabasına takılıyor ve arabayı bir \"hareketli akıllı kasaya\" dönüştürüyor. Müşteri ürünü sepete atarken barkodunu okutuyor, sepetini ve toplam tutarını anlık takip ediyor, alışverişini arabanın üzerinden ödeyip kasaya hiç uğramadan çıkıyor. Bu, mağaza içinde sürtünmesiz bir \"tara-ve-git\" deneyimidir.",
