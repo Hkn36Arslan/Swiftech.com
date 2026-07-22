@@ -19,10 +19,10 @@ export const nav = [
 ] as const
 
 export const hero = {
-  eyebrow: "Swiftech ürünü",
-  title: "Alışverişin yeni adresi burada",
+  eyebrow: "Swıftech ürünü",
+  title: "Alışverişi Yeniden İcat Ettik: FLOW",
   subtitle:
-    "OkuGör Dijital Sepet, sepetinize attığınız her ürünü anında ekranda gösterir, toplam tutarınızı gözünüzün önünde şekillendirir. Kamerayla barkodu okut, ekrana bak — bu kadar basit.",
+    "Her gün milyonlarca insan, yüz yıllık hantal metal arabaları marketlerde sürükleyip bitmek bilmeyen kasa kuyruklarında zaman kaybediyor. Biz bugün bu ilkel deneyime son veriyoruz. FLOW, karmaşık teknolojileri arka planda saklayan akıllı kameraları, bütçenizi anında şeffaflaştıran minimalist ekranı ve kasa sırasını tamamen yok eden yapısıyla alışverişi pürüzsüz bir akışa dönüştürüyor. Mağazaya girin, ürünleri sepete bırakın ve sadece yürüyüp çıkın. Tüketiciye en değerli hazinesi olan 'zamanı' geri veren bu sihirli sadelik; markalara tam satın alma kararının verildiği an müşteriye ulaşan kişiselleştirilmiş bir reklam alanı, perakendecilere ise sepet ortalamasını zirveye taşıyan yeni bir medya gelir kapısı sunuyor.",
   primaryCta: "Demo Talep Et",
   secondaryCta: "Projeleri İncele",
 }
@@ -57,45 +57,18 @@ export const projects: Project[] = [
 export const about = {
   eyebrow: "Hakkımızda",
   intro:
-    "Swiftech, perakendenin en büyük operasyonel sorunlarından birini çözmek için kurulmuş bir perakende teknolojisi şirketidir: kasa. Kasa kuyruğu, hem müşteri memnuniyetini düşüren hem de marketlerin personel maliyetini artıran, on yıllardır çözülmemiş bir darboğazdır. Biz bu darboğazı, mevcut market arabalarına entegre ettiğimiz akıllı panel teknolojisiyle ortadan kaldırıyoruz.",
-  cards: [
-    {
-      lead: "Ne yapıyoruz.",
-      body:
-        "Geliştirdiğimiz panel, standart bir market arabasına takılıyor ve arabayı bir \"hareketli akıllı kasaya\" dönüştürüyor. Müşteri ürünü sepete atarken barkodunu okutuyor, sepetini ve toplam tutarını anlık takip ediyor, alışverişini arabanın üzerinden ödeyip kasaya hiç uğramadan çıkıyor. Bu, mağaza içinde sürtünmesiz bir \"tara-ve-git\" deneyimidir.",
-    },
-    {
-      lead: "Neden savunulabilir bir teknoloji.",
-      body:
-        "Bu pazarda asıl zorluk tarama değil, kayıp önlemedir. Swiftech, sepete konan her ürünün okutulan ve ödenen ürünle eşleştiğini çok katmanlı bir doğrulama mimarisiyle güvence altına alıyor: barkod okuma, ağırlık doğrulama, bilgisayarlı görü ve davranış analizi birlikte çalışıyor. Bu katmanların entegrasyonu, kolayca kopyalanamayan ve şirketin asıl teknolojik değerini oluşturan yapıdır.",
-    },
-    {
-      lead: "Neden ölçeklenebilir bir iş modeli.",
-      body:
-        "Panelimiz mevcut arabalara sonradan takıldığı için market, filosunu yenilemek zorunda kalmıyor. Bu, rakip çözümlerin en büyük engeli olan yüksek kurulum maliyetini ortadan kaldırıyor; benimsemeyi hızlandırıyor ve teknolojiyi yalnızca büyük zincirlerin değil, orta ölçekli perakendenin de erişebileceği bir noktaya taşıyor. Donanımın yanında, abonelik bazlı yazılım ve veri hizmetleriyle tekrar eden gelir modeli kuruyoruz.",
-    },
-    {
-      lead: "Donanımın ötesinde: veri.",
-      body:
-        "Her panel aynı zamanda bir veri toplama noktasıdır. Müşteri davranışı, kampanya etkinliği ve satış örüntüleri hakkında marketin bugüne kadar erişemediği veriyi, aksiyon alınabilir bir analitik katmanına dönüştürüyoruz. Ayrıca ekran, mağaza içi reklam ve kişiselleştirilmiş kampanyalar için yeni bir gelir kanalı yaratıyor. Böylece tek bir cihaz üç iş modeline hizmet ediyor: operasyonel verimlilik, veri ve perakende medyası.",
-    },
-    {
-      lead: "Pazar.",
-      body:
-        "Küresel akıllı perakende ve sürtünmesiz alışveriş pazarı, artan personel maliyetleri ve değişen tüketici beklentileriyle hızla büyüyor. Swiftech, bu büyümenin en pratik ve en hızlı benimsenebilir giriş noktasında konumlanıyor: pahalı mağaza yenileme projeleri değil, mevcut altyapıya takılan, ilk günden değer üreten bir çözüm.",
-    },
-    {
-      lead: "Ekip ve yaklaşım.",
-      body:
-        "Swiftech'i mühendislik disipliniyle yönetiyoruz. Bir çözümün ne kadar hızlı sahaya çıktığı kadar, sahada ne kadar istikrarlı çalıştığıyla da ölçülüyoruz; çünkü perakende, kesintiyi affetmeyen bir sektördür. Adımızdaki \"swift\" hem müşteriye kazandırdığımız hızı hem de pazara çıkış disiplinimizi ifade eder.",
-    },
-  ],
+    "2026 yılında kurulan Swiftech, alışveriş deneyimini dijitalleştirmek amacıyla yola çıkmış bir perakende teknolojisi şirketidir. Geliştirdiği dijital ekranlı akıllı sepet sistemi, müşterilere ürün fiyatını, toplam tutarı ve kampanyaları anlık olarak gösterir; ürün arama ve mağaza içi yönlendirme özellikleriyle alışverişi hızlandırır. " +
+
+" Sistem, mağazalar için de güçlü bir araçtır: kampanyaları sepet ekranında öne çıkarır, satışı artırır ve müşteri alışkanlıklarına dair veri sunar. Ar-Ge ve yazılım süreçlerini kendi bünyesinde yürüten Swiftech, kurulumdan teknik desteğe uçtan uca hizmet sağlar." + 
+
+" Yenilikçi teknolojisi ve müşteri odaklı yaklaşımıyla Swiftech, perakendenin geleceğini bugünden şekillendiriyor.",
 }
 
 export const iletisim = {
   eyebrow: "İletişim",
   intro:
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum euismod, nunc ut aliquam laoreet, elit velit fermentum enim, id ullamcorper nibh justo sed nulla. Praesent sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris.",
+    "Swiftech, perakendeye tek bir cihazla üç boyutta değer üretiyor: operasyonel verimlilik, veri ve yeni bir gelir kanalı. Mevcut altyapınıza kolayca entegre olan, ilk günden ölçülebilir sonuç veren bir teknoloji ortağı arıyorsanız, doğru yerdesiniz." + 
+    "Mağazanız için nasıl bir fark yaratabileceğimizi konuşmak, size özel bir demo ve kurulum planı çıkarmak isteriz."
 }
 
 export const contactInterests = [
@@ -107,8 +80,8 @@ export const contactInterests = [
 export const contactInfo = {
   // TODO: Gerçek iletişim bilgileriyle güncellenecek.
   email: "info@swiftech.com",
-  phone: "+90 (000) 000 00 00",
-  address: "Adres bilgisi eklenecek",
+  phone: "+90 (542) 772 26 91",
+  address: "Halkalı Merkez Mah. Halkalı Cad No:281/2355 Ofis No:395/A, 34303 Küçükçekmece/İstanbul/Türkiye",
 }
 
 export const footer = {
