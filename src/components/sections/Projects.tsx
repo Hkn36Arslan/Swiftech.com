@@ -21,16 +21,16 @@ export function Projects() {
           <RevealItem>
             <Link
               to={`/projeler/${project.slug}`}
-              className="group grid border border-hairline transition-colors duration-[var(--duration-base)] ease-[var(--ease-standard)] hover:border-lime lg:grid-cols-2"
+              className="group grid gap-8 bg-gray-950 p-4 transition-[transform,box-shadow] duration-[var(--duration-base)] ease-[var(--ease-standard)] hover:-translate-y-1.5 hover:shadow-[0_24px_48px_rgba(0,0,0,0.4)] sm:p-6 lg:grid-cols-2 lg:gap-10 lg:p-8"
             >
-              <div className="relative aspect-[4/3] overflow-hidden bg-gray-950 lg:aspect-auto">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-[10px] bg-gray-900 lg:aspect-auto">
                 <img
                   src={project.image}
                   alt=""
                   className="h-full w-full object-cover transition-transform duration-[var(--duration-base)] ease-[var(--ease-standard)] group-hover:scale-105"
                 />
               </div>
-              <div className="flex flex-col justify-center p-8 sm:p-12 lg:p-16">
+              <div className="flex flex-col justify-center py-2 sm:py-4 lg:py-8">
                 <span className="text-nav text-lime">Öne Çıkan Proje</span>
                 <h3 className="text-h1 mt-4 text-white">{project.title}</h3>
                 <p className="text-body mt-6 max-w-md text-base sm:text-lg">
@@ -39,7 +39,7 @@ export function Projects() {
                 <span className="mt-8 inline-flex items-center gap-2 text-nav text-white">
                   Detayları İncele
                   <ArrowUpRight
-                    className="size-4 transition-transform duration-[var(--duration-base)] ease-[var(--ease-standard)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                    className="size-4 text-lime transition-transform duration-[var(--duration-base)] ease-[var(--ease-standard)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                     aria-hidden="true"
                   />
                 </span>
