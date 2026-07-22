@@ -1,14 +1,13 @@
-import { memo, useEffect, useLayoutEffect, useMemo, useState } from "react"
+import { useEffect, useLayoutEffect, useMemo, useState } from "react"
 import {
   AnimatePresence,
+  animate,
   motion,
-  useAnimation,
   useMotionValue,
   useTransform,
   type MotionValue,
 } from "framer-motion"
-
-type AnimationControls = ReturnType<typeof useAnimation>
+import { ChevronLeft, ChevronRight } from "lucide-react"
 
 export const useIsomorphicLayoutEffect =
   typeof window !== "undefined" ? useLayoutEffect : useEffect
@@ -60,6 +59,7 @@ const duration = 0.15
 const easeOut = [0.32, 0.72, 0, 1] as const
 const transition = { duration, ease: easeOut }
 const transitionOverlay = { duration: 0.5, ease: easeOut }
+const springTransition = { type: "spring", stiffness: 100, damping: 30, mass: 0.1 } as const
 
 /** Az sayıda gerçek görselle bile halkanın dolu/akıcı görünmesi için
  * minimum bir yüz sayısına tamamlanır (görseller tekrar eder). */
@@ -76,10 +76,11 @@ function normalizeAngle(angle: number) {
 }
 
 /**
- * Tek bir yüz — halkanın güncel rotation'ına göre kamera arkasına geçtiğinde
- * (>90°) yumuşakça solar. CSS `backface-visibility` bazı tarayıcı/compositor
- * kombinasyonlarında güvenilir çalışmadığı (yüz aynalanmış görünebiliyor)
- * için opacity motion value ile açıkça kontrol ediliyor.
+ * Tek bir yüz. Dönüş (rotateY) ve dışa doğru itme (translateZ) TEK bir
+ * transform string'inde birleştirilir — ayrı elemanlara bölünürse 3D
+ * kompozisyon bozuluyor ve kartlar dönmüyormuş gibi düz görünüyor. Kamera
+ * arkasına geçen (>90°) yüzler CSS backface-visibility güvenilir çalışmadığı
+ * için opacity motion value ile ayrıca yumuşakça soluyor.
  */
 function PhotoFace({
   rotation,
@@ -102,14 +103,13 @@ function PhotoFace({
     if (angle >= 100) return 0
     return 1 - (angle - 80) / 20
   })
-
   return (
     <motion.div
       className="absolute flex h-full origin-center items-center justify-center bg-gray-950 p-2 sm:p-2.5"
       style={{
         width: `${width}px`,
-        rotateY: baseAngle,
         opacity,
+        transform: `rotateY(${baseAngle}deg) translateZ(${radius}px)`,
         transformStyle: "preserve-3d",
       }}
       onClick={onClick}
@@ -118,102 +118,90 @@ function PhotoFace({
         src={face.src}
         alt=""
         layoutId={`img-${face.key}`}
-        className="pointer-events-none aspect-square w-full rounded-2xl object-cover shadow-[0_8px_30px_rgb(0,0,0,0.4)]"
+        className="pointer-events-none aspect-square w-full rounded-[16px] object-cover shadow-[0_8px_30px_rgb(0,0,0,0.4)]"
         initial={{ filter: "blur(4px)" }}
         layout="position"
         animate={{ filter: "blur(0px)" }}
         transition={transition}
-        style={{ transform: `translateZ(${radius}px)` }}
       />
     </motion.div>
   )
 }
 
-const Carousel = memo(
-  ({
-    handleClick,
-    controls,
-    faces,
-    isCarouselActive,
-  }: {
-    handleClick: (face: Face) => void
-    controls: AnimationControls
-    faces: Face[]
-    isCarouselActive: boolean
-  }) => {
-    const isScreenSizeSm = useMediaQuery("(max-width: 640px)")
-    // Kart boyutu (faceWidth) ve kartlar arası mesafe (radius) birbirinden
-    // bağımsız sabitlenir — kartların dev boyutta çıkmaması ya da üst üste
-    // binmemesi için.
-    const faceCount = faces.length
-    const faceWidth = isScreenSizeSm ? 150 : 220
-    const radius = isScreenSizeSm ? 320 : 480
-    const cylinderWidth = radius * 2 * Math.PI
-    const rotation = useMotionValue(0)
+function Carousel({
+  handleClick,
+  faces,
+  rotation,
+  isCarouselActive,
+}: {
+  handleClick: (face: Face) => void
+  faces: Face[]
+  rotation: MotionValue<number>
+  isCarouselActive: boolean
+}) {
+  const isScreenSizeSm = useMediaQuery("(max-width: 640px)")
+  // Kart boyutu (faceWidth) ve kartlar arası mesafe (radius) birbirinden
+  // bağımsız sabitlenir — kartların dev boyutta çıkmaması ya da üst üste
+  // binmemesi için.
+  const faceCount = faces.length
+  const faceWidth = isScreenSizeSm ? 150 : 220
+  const radius = isScreenSizeSm ? 320 : 480
+  const cylinderWidth = radius * 2 * Math.PI
 
-    return (
-      <div
-        className="flex h-full items-center justify-center bg-gray-950"
+  return (
+    <div
+      className="flex h-full items-center justify-center bg-gray-950"
+      style={{
+        perspective: "1600px",
+        transformStyle: "preserve-3d",
+        willChange: "transform",
+      }}
+    >
+      <motion.div
+        drag={isCarouselActive ? "x" : false}
+        dragConstraints={{ left: 0, right: 0 }}
+        dragElastic={0}
+        className="relative flex h-full origin-center cursor-grab justify-center active:cursor-grabbing"
         style={{
-          perspective: "1600px",
+          rotateY: rotation,
+          width: cylinderWidth,
           transformStyle: "preserve-3d",
-          willChange: "transform",
         }}
+        onDrag={(_, info) =>
+          isCarouselActive && rotation.set(rotation.get() + info.offset.x * 0.05)
+        }
+        onDragEnd={(_, info) =>
+          isCarouselActive &&
+          animate(rotation, rotation.get() + info.velocity.x * 0.05, springTransition)
+        }
       >
-        <motion.div
-          drag={isCarouselActive ? "x" : false}
-          className="relative flex h-full origin-center cursor-grab justify-center active:cursor-grabbing"
-          style={{
-            rotateY: rotation,
-            width: cylinderWidth,
-            transformStyle: "preserve-3d",
-          }}
-          onDrag={(_, info) =>
-            isCarouselActive && rotation.set(rotation.get() + info.offset.x * 0.05)
-          }
-          onDragEnd={(_, info) =>
-            isCarouselActive &&
-            controls.start({
-              rotateY: rotation.get() + info.velocity.x * 0.05,
-              transition: {
-                type: "spring",
-                stiffness: 100,
-                damping: 30,
-                mass: 0.1,
-              },
-            })
-          }
-          animate={controls}
-        >
-          {faces.map((face, i) => (
-            <PhotoFace
-              key={face.key}
-              rotation={rotation}
-              baseAngle={i * (360 / faceCount)}
-              width={faceWidth}
-              radius={radius}
-              face={face}
-              onClick={() => handleClick(face)}
-            />
-          ))}
-        </motion.div>
-      </div>
-    )
-  }
-)
-Carousel.displayName = "Carousel"
+        {faces.map((face, i) => (
+          <PhotoFace
+            key={face.key}
+            rotation={rotation}
+            baseAngle={i * (360 / faceCount)}
+            width={faceWidth}
+            radius={radius}
+            face={face}
+            onClick={() => handleClick(face)}
+          />
+        ))}
+      </motion.div>
+    </div>
+  )
+}
 
 /**
- * 21st.dev tarzı 3D döner galeri — sürükle-döndür + tıkla-büyüt (lightbox).
- * Görseller dışarıdan `images` prop'uyla verilir (proje foto galerisi gibi).
- * Radius/gölge/köşe yuvarlaklığı kullanıcının referans görseline göre
- * ayarlandı (bu bileşene özel — sitenin geri kalanındaki 2px radius
- * kuralının bilinçli bir istisnası).
+ * 21st.dev tarzı 3D döner galeri — sürükle-döndür / sol-sağ ok + tıkla-
+ * büyüt (lightbox). Görseller dışarıdan `images` prop'uyla verilir (proje
+ * foto galerisi gibi). Radius/gölge/köşe yuvarlaklığı kullanıcının referans
+ * görseline göre ayarlandı (bu bileşene özel — sitenin geri kalanındaki 2px
+ * radius kuralının bilinçli bir istisnası).
  */
 export function ThreeDPhotoCarousel({ images }: { images: string[] }) {
   const [activeFace, setActiveFace] = useState<Face | null>(null)
   const [isCarouselActive, setIsCarouselActive] = useState(true)
-  const controls = useAnimation()
+  const rotation = useMotionValue(0)
 
   const faces = useMemo<Face[]>(() => {
     if (images.length === 0) return []
@@ -228,12 +216,16 @@ export function ThreeDPhotoCarousel({ images }: { images: string[] }) {
   const handleClick = (face: Face) => {
     setActiveFace(face)
     setIsCarouselActive(false)
-    controls.stop()
   }
 
   const handleClose = () => {
     setActiveFace(null)
     setIsCarouselActive(true)
+  }
+
+  const rotate = (direction: 1 | -1) => {
+    const step = 360 / faces.length
+    animate(rotation, rotation.get() + direction * step, springTransition)
   }
 
   return (
@@ -247,14 +239,14 @@ export function ThreeDPhotoCarousel({ images }: { images: string[] }) {
             layoutId={`img-container-${activeFace.key}`}
             layout="position"
             onClick={handleClose}
-            className="fixed inset-0 z-50 m-5 flex items-center justify-center rounded-2xl bg-black/80 md:m-36 lg:mx-[19rem]"
+            className="fixed inset-0 z-50 m-5 flex items-center justify-center rounded-[16px] bg-black/80 md:m-36 lg:mx-[19rem]"
             style={{ willChange: "opacity" }}
             transition={transitionOverlay}
           >
             <motion.img
               layoutId={`img-${activeFace.key}`}
               src={activeFace.src}
-              className="max-h-full max-w-full rounded-2xl"
+              className="max-h-full max-w-full rounded-[16px]"
               initial={{ scale: 0.5 }}
               animate={{ scale: 1 }}
               transition={{ delay: 0.5, duration: 0.5, ease: [0.25, 0.1, 0.25, 1] as const }}
@@ -266,10 +258,28 @@ export function ThreeDPhotoCarousel({ images }: { images: string[] }) {
       <div className="relative h-[260px] w-full overflow-hidden sm:h-[320px]">
         <Carousel
           handleClick={handleClick}
-          controls={controls}
           faces={faces}
+          rotation={rotation}
           isCarouselActive={isCarouselActive}
         />
+      </div>
+      <div className="mt-6 flex justify-center gap-3">
+        <button
+          type="button"
+          onClick={() => rotate(-1)}
+          aria-label="Önceki görsel"
+          className="flex size-11 items-center justify-center border border-hairline text-white transition-colors duration-[var(--duration-base)] hover:border-lime hover:text-lime"
+        >
+          <ChevronLeft className="size-5" aria-hidden="true" />
+        </button>
+        <button
+          type="button"
+          onClick={() => rotate(1)}
+          aria-label="Sonraki görsel"
+          className="flex size-11 items-center justify-center border border-hairline text-white transition-colors duration-[var(--duration-base)] hover:border-lime hover:text-lime"
+        >
+          <ChevronRight className="size-5" aria-hidden="true" />
+        </button>
       </div>
     </motion.div>
   )
