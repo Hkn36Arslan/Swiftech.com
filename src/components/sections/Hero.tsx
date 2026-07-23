@@ -9,7 +9,10 @@ export function Hero() {
   const reduceMotion = useReducedMotion()
 
   return (
-    <section id="hero" className="relative min-h-screen overflow-hidden bg-black">
+    <section
+      id="hero"
+      className="relative flex min-h-dvh flex-col justify-end overflow-hidden bg-black"
+    >
       <div className="absolute inset-0" aria-hidden="true">
         {heroVideoSrc && !reduceMotion ? (
           <motion.video
@@ -38,7 +41,7 @@ export function Hero() {
         />
       </div>
 
-      <div className="absolute inset-x-0 bottom-0 z-10 px-4 pb-20 sm:px-6 sm:pb-28 lg:px-10">
+      <div className="relative z-10 px-4 pt-28 pb-20 sm:px-6 sm:pt-32 sm:pb-28 lg:px-10">
         <motion.div
           initial={reduceMotion ? undefined : { opacity: 0, y: 20 }}
           animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
