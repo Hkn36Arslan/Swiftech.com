@@ -6,7 +6,7 @@ export function Footer() {
 
   return (
     <footer className="border-t border-hairline bg-black">
-      <div className="mx-auto max-w-[1600px] px-12 py-14 sm:py-16">
+      <div className="mx-auto max-w-[1600px] px-24 py-14 sm:py-16">
         <div className="flex flex-col gap-10 sm:flex-row sm:flex-wrap sm:justify-between sm:gap-x-12 sm:gap-y-10">
           <div>
             <SwiftechLogo />
