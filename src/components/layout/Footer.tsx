@@ -11,7 +11,7 @@ export function Footer() {
           <div>
             <SwiftechLogo />
             <p className="text-body mt-4 max-w-xs">{footer.tagline}</p>
-            <p className="text-caption mt-6">© {year} Swiftech. Tüm hakları saklıdır.</p>
+            <p className="text-caption mt-6">© {year} Swıftech. Tüm hakları saklıdır.</p>
           </div>
 
           <div>

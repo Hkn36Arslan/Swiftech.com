@@ -18,7 +18,7 @@ export function Header() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-hairline bg-black">
       <div className="mx-auto flex h-16 max-w-[1600px] items-center justify-between px-4 sm:px-6 lg:px-10">
-        <a href="/" className="shrink-0" aria-label="Swiftech ana sayfa">
+        <a href="/" className="shrink-0" aria-label="Swıftech ana sayfa">
           <SwiftechLogo />
         </a>
 

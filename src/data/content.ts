@@ -54,17 +54,17 @@ export const projects: Project[] = [
 export const about = {
   eyebrow: "Hakkımızda",
   intro:
-    "2026 yılında kurulan Swiftech, alışveriş deneyimini dijitalleştirmek amacıyla yola çıkmış bir perakende teknolojisi şirketidir. Geliştirdiği dijital ekranlı akıllı sepet sistemi, müşterilere ürün fiyatını, toplam tutarı ve kampanyaları anlık olarak gösterir; ürün arama ve mağaza içi yönlendirme özellikleriyle alışverişi hızlandırır. " +
+    "2026 yılında kurulan Swıftech, alışveriş deneyimini dijitalleştirmek amacıyla yola çıkmış bir perakende teknolojisi şirketidir. Geliştirdiği dijital ekranlı akıllı sepet sistemi, müşterilere ürün fiyatını, toplam tutarı ve kampanyaları anlık olarak gösterir; ürün arama ve mağaza içi yönlendirme özellikleriyle alışverişi hızlandırır. " +
 
-" Sistem, mağazalar için de güçlü bir araçtır: kampanyaları sepet ekranında öne çıkarır, satışı artırır ve müşteri alışkanlıklarına dair veri sunar. Ar-Ge ve yazılım süreçlerini kendi bünyesinde yürüten Swiftech, kurulumdan teknik desteğe uçtan uca hizmet sağlar." + 
+" Sistem, mağazalar için de güçlü bir araçtır: kampanyaları sepet ekranında öne çıkarır, satışı artırır ve müşteri alışkanlıklarına dair veri sunar. Ar-Ge ve yazılım süreçlerini kendi bünyesinde yürüten Swıftech, kurulumdan teknik desteğe uçtan uca hizmet sağlar." + 
 
-" Yenilikçi teknolojisi ve müşteri odaklı yaklaşımıyla Swiftech, perakendenin geleceğini bugünden şekillendiriyor.",
+" Yenilikçi teknolojisi ve müşteri odaklı yaklaşımıyla Swıftech, perakendenin geleceğini bugünden şekillendiriyor.",
 }
 
 export const iletisim = {
   eyebrow: "İletişim",
   intro:
-    "Swiftech, perakendeye tek bir cihazla üç boyutta değer üretiyor: operasyonel verimlilik, veri ve yeni bir gelir kanalı. Mevcut altyapınıza kolayca entegre olan, ilk günden ölçülebilir sonuç veren bir teknoloji ortağı arıyorsanız, doğru yerdesiniz." + 
+    "Swıftech, perakendeye tek bir cihazla üç boyutta değer üretiyor: operasyonel verimlilik, veri ve yeni bir gelir kanalı. Mevcut altyapınıza kolayca entegre olan, ilk günden ölçülebilir sonuç veren bir teknoloji ortağı arıyorsanız, doğru yerdesiniz." + 
     "Mağazanız için nasıl bir fark yaratabileceğimizi konuşmak, size özel bir demo ve kurulum planı çıkarmak isteriz."
 }
 
@@ -90,7 +90,5 @@ export const footer = {
   ],
   social: [
     { href: "#", label: "LinkedIn" },
-    { href: "#", label: "Instagram" },
-    { href: "#", label: "X" },
   ],
 }
