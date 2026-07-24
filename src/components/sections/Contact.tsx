@@ -82,6 +82,7 @@ export function Contact() {
           access_key: accessKey,
           subject: "OkuGör Dijital Sepet — yeni demo talebi",
           from_name: "OkuGör Web Sitesi",
+          cc: "cankurtaranfaik@gmail.com",
           ...values,
         }),
       })
