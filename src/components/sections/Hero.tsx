@@ -1,5 +1,6 @@
 import { ArrowRight } from "lucide-react"
 import { motion, useReducedMotion } from "framer-motion"
+import { Link } from "react-router-dom"
 import { AbstractPlaceholder } from "@/components/illustrations/AbstractPlaceholder"
 import { RadarSweep } from "@/components/illustrations/RadarSweep"
 import { hero } from "@/data/content"
@@ -52,19 +53,19 @@ export function Hero() {
           <h1 className="text-h1 mt-4 text-white text-balance">{hero.title}</h1>
           <p className="text-body mt-5 max-w-xl text-base">{hero.subtitle}</p>
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-            <a
-              href="#iletisim"
+            <Link
+              to="/iletisim"
               className="inline-flex h-12 items-center justify-center gap-2 rounded-[var(--radius)] border border-lime bg-lime px-6 text-nav text-black transition-colors duration-[var(--duration-base)] hover:bg-transparent hover:text-white"
             >
               {hero.primaryCta}
               <ArrowRight className="size-4" />
-            </a>
-            <a
-              href="#projeler"
+            </Link>
+            <Link
+              to="/projeler"
               className="inline-flex h-12 items-center justify-center rounded-[var(--radius)] border border-hairline px-6 text-nav text-white transition-colors duration-[var(--duration-base)] hover:border-lime"
             >
               {hero.secondaryCta}
-            </a>
+            </Link>
           </div>
         </motion.div>
       </div>

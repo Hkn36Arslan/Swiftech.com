@@ -12,9 +12,9 @@ import okuGorGallery3 from "@/assets/oku-gor-gallery-3.jpg"
 import okuGorGallery4 from "@/assets/oku-gor-gallery-4.jpg"
 
 export const nav = [
-  { href: "/#projeler", label: "Projeler" },
-  { href: "/#hakkimizda", label: "Hakkımızda" },
-  { href: "/#iletisim", label: "İletişim" },
+  { href: "/projeler", label: "Projeler" },
+  { href: "/hakkimizda", label: "Hakkımızda" },
+  { href: "/iletisim", label: "İletişim" },
 ] as const
 
 export const hero = {
@@ -84,9 +84,9 @@ export const contactInfo = {
 export const footer = {
   tagline: "Alışverişin yeni adresi.",
   company: [
-    { href: "/#hakkimizda", label: "Hakkımızda" },
-    { href: "/#projeler", label: "Projeler" },
-    { href: "/#iletisim", label: "İletişim" },
+    { href: "/hakkimizda", label: "Hakkımızda" },
+    { href: "/projeler", label: "Projeler" },
+    { href: "/iletisim", label: "İletişim" },
   ],
   social: [
     { href: "#", label: "LinkedIn" },

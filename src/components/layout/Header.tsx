@@ -1,17 +1,18 @@
 import { useState } from "react"
-import { useLocation } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 import { Menu, X } from "lucide-react"
 import { SwiftechLogo } from "@/components/layout/Logo"
 import { nav } from "@/data/content"
 import { useActiveSection } from "@/hooks/useActiveSection"
 import { cn } from "@/lib/utils"
 
-const sectionIds = nav.map((item) => item.href.split("#")[1])
+const sectionIds = nav.map((item) => item.href.replace(/^\//, ""))
+const homePaths = ["/", ...nav.map((item) => item.href)]
 
 export function Header() {
   const [open, setOpen] = useState(false)
   const location = useLocation()
-  const isHome = location.pathname === "/"
+  const isHome = homePaths.includes(location.pathname)
   const observedActiveId = useActiveSection(sectionIds, location.pathname)
   const activeId = isHome ? observedActiveId : null
 
@@ -24,12 +25,12 @@ export function Header() {
 
         <nav className="hidden items-center gap-9 md:flex" aria-label="Ana navigasyon">
           {nav.map((item) => {
-            const id = item.href.split("#")[1]
+            const id = item.href.replace(/^\//, "")
             const isActive = activeId === id
             return (
-              <a
+              <Link
                 key={item.href}
-                href={item.href}
+                to={item.href}
                 className={cn(
                   "text-nav border-b pb-0.5 transition-colors duration-[var(--duration-base)]",
                   isActive
@@ -39,18 +40,18 @@ export function Header() {
                 aria-current={isActive ? "true" : undefined}
               >
                 {item.label}
-              </a>
+              </Link>
             )
           })}
         </nav>
 
         <div className="hidden md:block">
-          <a
-            href="/#iletisim"
+          <Link
+            to="/iletisim"
             className="rounded-[var(--radius)] border border-lime px-5 py-2 text-nav text-white transition-colors duration-[var(--duration-base)] hover:bg-lime hover:text-black"
           >
             Demo Talep Et
-          </a>
+          </Link>
         </div>
 
         <button
@@ -71,12 +72,12 @@ export function Header() {
         >
           <ul className="flex flex-col gap-1">
             {nav.map((item) => {
-              const id = item.href.split("#")[1]
+              const id = item.href.replace(/^\//, "")
               const isActive = activeId === id
               return (
                 <li key={item.href}>
-                  <a
-                    href={item.href}
+                  <Link
+                    to={item.href}
                     className={cn(
                       "text-nav block border-l-2 py-3 pl-3 transition-colors duration-[var(--duration-base)]",
                       isActive
@@ -87,18 +88,18 @@ export function Header() {
                     onClick={() => setOpen(false)}
                   >
                     {item.label}
-                  </a>
+                  </Link>
                 </li>
               )
             })}
             <li className="pt-2">
-              <a
-                href="/#iletisim"
+              <Link
+                to="/iletisim"
                 className="block rounded-[var(--radius)] border border-lime px-5 py-3 text-center text-nav text-white"
                 onClick={() => setOpen(false)}
               >
                 Demo Talep Et
-              </a>
+              </Link>
             </li>
           </ul>
         </nav>

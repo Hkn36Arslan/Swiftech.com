@@ -21,7 +21,7 @@ export function ProjectDetail() {
       <div className="pt-16">
         <div className="mx-auto max-w-[1600px] px-4 pt-8 sm:px-6 lg:px-10">
           <Link
-            to="/#projeler"
+            to="/projeler"
             className="text-nav inline-flex items-center gap-2 text-gray-400 transition-colors duration-[var(--duration-base)] hover:text-white"
           >
             <ArrowLeft className="size-4" />
@@ -35,13 +35,13 @@ export function ProjectDetail() {
           <h1 className="text-h1 mt-12 text-white sm:mt-16">{project.title}</h1>
           <p className="text-body mt-6 max-w-2xl text-base sm:text-lg">{project.detailBody}</p>
 
-          <a
-            href="/#iletisim"
+          <Link
+            to="/iletisim"
             className="mt-10 inline-flex h-12 items-center justify-center gap-2 rounded-[var(--radius)] border border-lime bg-lime px-6 text-nav text-black transition-colors duration-[var(--duration-base)] hover:bg-transparent hover:text-white"
           >
             Demo Talep Et
             <ArrowRight className="size-4" />
-          </a>
+          </Link>
         </div>
       </div>
     </main>

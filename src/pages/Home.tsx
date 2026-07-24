@@ -1,4 +1,5 @@
 import { lazy, Suspense, useEffect } from "react"
+import { useLocation } from "react-router-dom"
 import { Hero } from "@/components/sections/Hero"
 import { Projects } from "@/components/sections/Projects"
 import { About } from "@/components/sections/About"
@@ -8,16 +9,23 @@ import { About } from "@/components/sections/About"
 const Contact = lazy(() => import("@/components/sections/Contact"))
 
 /**
- * SPA'da ilk yüklemede URL'de #hash varsa (paylaşılan/doğrudan bağlantı,
- * ya da başka bir sayfadan "/#hakkimizda" gibi bir nav linkiyle geliş),
- * tarayıcı hash'i React henüz DOM'u basmadan işlediği için otomatik scroll
- * çalışmaz — bu effect hedef element render olunca (Contact lazy chunk
- * dahil) kısa bir yoklama ile devreye girer.
+ * "/", "/projeler", "/hakkimizda", "/iletisim" hepsi aynı Home bileşenini
+ * render eder (bkz. App.tsx) — bu, tek sayfalık kaydırma deneyimini
+ * korurken URL'lerin temiz path olmasını sağlar (eskiden "/#iletisim" gibi
+ * hash'lerdi). Route değiştiğinde (ilk yükleme ya da Header'daki Link'lerle
+ * SPA içi geçiş — Home remount olmadığı için sadece pathname değişir) ilgili
+ * section'a kaydırılır. Contact lazy-load edildiği için hedef element mount
+ * anında henüz DOM'da olmayabilir — kısa bir yoklama ile devreye girer.
  */
-function useScrollToInitialHash() {
+function useScrollToSection() {
+  const location = useLocation()
+
   useEffect(() => {
-    const id = window.location.hash.replace("#", "")
-    if (!id) return
+    const id = location.pathname === "/" ? null : location.pathname.replace(/^\//, "")
+    if (!id) {
+      window.scrollTo({ top: 0, behavior: "instant" })
+      return
+    }
 
     let attempts = 0
     const tryScroll = () => {
@@ -30,11 +38,11 @@ function useScrollToInitialHash() {
       if (attempts < 40) requestAnimationFrame(tryScroll)
     }
     tryScroll()
-  }, [])
+  }, [location.pathname])
 }
 
 export function Home() {
-  useScrollToInitialHash()
+  useScrollToSection()
 
   return (
     <>
